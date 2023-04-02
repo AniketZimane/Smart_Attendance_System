@@ -16,7 +16,7 @@ public class Student {
     String enrollyear;
     String dob;
     String gender;
-    String age;
+    Integer age;
     String emailid;
     String country;
     String aadharno;
@@ -57,7 +57,7 @@ public class Student {
         this.extension = extension;
     }
 
-    public Student(long enrollno, String usertype, String firstname, String lastname, String fathername, String mothername, String enrollyear, String dob, String gender, String age, String emailid, String country, String aadharno, String mobileno, String deptname, String collagename, String sem, String address, String status, String extension,String password) {
+    public Student(long enrollno, String usertype, String firstname, String lastname, String fathername, String mothername, String enrollyear, String dob, String gender, Integer age, String emailid, String country, String aadharno, String mobileno, String deptname, String collagename, String sem, String address, String status, String extension,String password) {
         this.enrollno = enrollno;
         this.usertype = usertype;
         this.firstname = firstname;
@@ -153,11 +153,11 @@ public class Student {
         this.gender = gender;
     }
 
-    public String getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

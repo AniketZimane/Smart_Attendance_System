@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="/assets/css/Ludens---Dark-Mode-Admin-Dashboard.css">
     <link rel="stylesheet" href="/assets/css/Modern-Contact-Form.css">
     <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="/assets/css/select.css">
     <link rel="stylesheet" href="/assets/css/side-menu.css">
     <link rel="stylesheet" href="/assets/css/sidebar-1-style4.css">
     <link rel="stylesheet" href="/assets/css/sidebar-1.css">
@@ -41,53 +42,78 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
+
+    <link rel="stylesheet" href="/assets/bootstrap/css/DashBoard.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
 </head>
 
 <body>
-<div th:replace="NavigationBar.html :: navbar"></div>
+<div th:include="NavigationBar.html :: navbar"></div>
+<!--<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">-->
+<!--    <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">-->
+<!--        <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>-->
+<!--        <div class="sidebar-brand-text mx-3"><span>Brand</span></div>-->
+<!--    </a>-->
+<!--        <hr class="sidebar-divider my-0">-->
+<!--        <ul class="navbar-nav text-light" id="accordionSidebar">-->
+<!--            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Table</span></a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="login.html"><i class="far fa-user-circle"></i><span>Login</span></a></li>-->
+<!--            <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-user-circle"></i><span>Register</span></a></li>-->
+<!--        </ul>-->
+<!--        <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>-->
+<!--    </div>-->
+<!--</nav>-->
     <div id="sidemenu"></div>
     <div class="container py-4 py-xl-5">
-        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3 rubberBand animated">
-            <div class="col">
+        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3 text-start d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-end rubberBand animated" style="text-align: left;">
+            <div class="col" style="width: 300px;">
                 <div class="card">
-                    <div class="card-body p-4" data-bss-hover-animate="pulse">
-                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex align-items-center justify-content-md-center d-inline-block mb-3 bs-icon" style="color: var(--bs-blue);background: var(--bs-card-bg);"><a class="btn btn-primary" role="button" style="background: var(--bs-btn-bg);color: var(--bs-card-bg);" href="/register/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-credit-card-2-back-fill" style="font-size: 36px;">
+                    <div class="card-body p-4" data-bss-hover-animate="pulse" style="height: 150px;">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex align-items-center justify-content-md-center d-inline-block mb-3 bs-icon" style="color: var(--bs-blue);background: var(--bs-card-bg);">
+                            <a class="btn btn-primary" role="button" style="background: var(--bs-btn-bg);color: var(--bs-card-bg);" href="/register/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-credit-card-2-back-fill" style="font-size: 36px;">
                                     <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5H0V4zm11.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zM0 11v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1H0z"></path>
                                 </svg></a></div>
                         <h3 class="card-title" style="font-family: 'Abyssinica SIL', serif;font-weight: bold;font-style: italic;">Card Generated</h3>
-                        <h1>400</h1>
                         <p class="card-text"></p>
                         <div style="text-align: center;"></div>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" style="width: 300px;">
                 <div class="card">
-                    <div class="card-body p-4" data-bss-hover-animate="pulse">
-                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex align-items-center justify-content-md-center d-inline-block mb-3 bs-icon" style="color: var(--bs-blue);background: var(--bs-card-bg);"><a class="btn btn-primary" role="button" style="background: var(--bs-btn-bg);color: var(--bs-card-bg);" href="/blockcard/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 36px;">
+                    <div class="card-body p-4" data-bss-hover-animate="pulse" style="height: 150px;">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex align-items-center justify-content-md-center d-inline-block mb-3 bs-icon" style="color: var(--bs-blue);background: var(--bs-card-bg);">
+                            <a class="btn btn-primary" role="button" style="background: var(--bs-btn-bg);color: var(--bs-card-bg);" href="/blockcard/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 36px;">
                                     <path d="M8.46457 14.1213C8.07404 14.5118 8.07404 15.145 8.46457 15.5355C8.85509 15.926 9.48825 15.926 9.87878 15.5355L15.5356 9.87862C15.9262 9.4881 15.9262 8.85493 15.5356 8.46441C15.1451 8.07388 14.5119 8.07388 14.1214 8.46441L8.46457 14.1213Z" fill="currentColor"></path>
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M6.34315 17.6569C9.46734 20.781 14.5327 20.781 17.6569 17.6569C20.781 14.5327 20.781 9.46734 17.6569 6.34315C14.5327 3.21895 9.46734 3.21895 6.34315 6.34315C3.21895 9.46734 3.21895 14.5327 6.34315 17.6569ZM16.2426 16.2426C13.8995 18.5858 10.1005 18.5858 7.75736 16.2426C5.41421 13.8995 5.41421 10.1005 7.75736 7.75736C10.1005 5.41421 13.8995 5.41421 16.2426 7.75736C18.5858 10.1005 18.5858 13.8995 16.2426 16.2426Z" fill="currentColor"></path>
                                 </svg></a></div>
                         <h3 class="card-title" style="font-family: 'Abyssinica SIL', serif;font-weight: bold;font-style: italic;">Block Card</h3>
-                        <h1>40</h1>
                         <p class="card-text"></p>
                         <div style="text-align: center;"></div>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" style="width: 300px;">
                 <div class="card">
-                    <div class="card-body p-4" data-bss-hover-animate="pulse">
-                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center d-inline-block mb-3 bs-icon" style="background: var(--bs-card-bg);"><a class="btn btn-primary" role="button" href="/attendancereport/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-receipt" style="color: var(--white-color);font-size: 36px;">
+                    <div class="card-body p-4" data-bss-hover-animate="pulse" style="height: 150px;">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center d-inline-block mb-3 bs-icon" style="background: var(--bs-card-bg);">
+                            <a class="btn btn-primary" role="button" href="/attendancereport/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-receipt" style="color: var(--white-color);font-size: 36px;">
                                     <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"></path>
                                     <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"></path>
                                 </svg></a></div>
                         <h3 class="card-title" style="font-family: 'Abyssinica SIL', serif;font-weight: bold;font-style: italic;">Report</h3>
-                        <h1>29-03-2023</h1>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" style="width: 300px;">
                 <div class="card">
                     <div class="card-body p-4" data-bss-hover-animate="pulse">
                         <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center d-inline-block mb-3 bs-icon" style="background: var(--bs-card-bg);"><a class="btn btn-primary" role="button" href="/findUser/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-search" style="color: var(--white-color);font-size: 36px;">
@@ -97,10 +123,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" style="width: 300px;">
                 <div class="card">
                     <div class="card-body p-4" data-bss-hover-animate="pulse" style="border-style: hidden;border-color: var(--bs-blue);">
-                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex align-items-center d-inline-block mb-3 bs-icon" style="text-align: center;background: var(--bs-card-bg);"><a class="btn btn-primary" role="button" href="/record/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-eye-fill" style="color: var(--white-color);font-size: 36px;">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex align-items-center d-inline-block mb-3 bs-icon" style="text-align: center;background: var(--bs-card-bg);">
+                            <a class="btn btn-primary" role="button" href="/record/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-eye-fill" style="color: var(--white-color);font-size: 36px;">
                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"></path>
                                     <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"></path>
                                 </svg></a></div>
@@ -108,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col" style="width: 300px;">
                 <div class="card">
                     <div class="card-body p-4" data-bss-hover-animate="pulse">
                         <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center d-inline-block mb-3 bs-icon" style="background: var(--bs-card-bg);"><a class="btn btn-primary" role="button" href="/scancard/"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-qr-code-scan" style="color: var(--white-color);font-size: 36px;">
@@ -142,6 +170,10 @@
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
 
+    <script src="/assets/bootstrap/js/DashBoard.min.js"></script>
+    <script src="/assets/js/chart.min.js"></script>
+    <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/theme.js"></script>
 </body>
 
 </html>

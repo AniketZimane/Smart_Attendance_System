@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class StudentController {
@@ -27,7 +28,20 @@ public class StudentController {
     @GetMapping("/")
     public String dashboard()
     {
-        return "Dashboard";
+
+        return "MainDashBoard";
+    }
+    @GetMapping("/database/")
+    public String recordOfStudent()
+    {
+
+        return "Record";
+    }
+    @GetMapping("/login/")
+    public String login()
+    {
+
+        return "LoginPage";
     }
     @GetMapping("/register/")
     public String register()
@@ -60,8 +74,8 @@ public class StudentController {
         {
             totalPages = 1;
         }
-        List<Student> stulist=sturepo.findAll();
-        model.addAttribute("stulist",stulist);
+
+        model.addAttribute("stud", stuNew);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("curPage", 1);
         model.addAttribute("msg","Employee saved successfully");
@@ -92,15 +106,18 @@ public class StudentController {
     {
         List<Student> stulist=sturepo.findAll();
         model.addAttribute("stulist",stulist);
-        return "RecordPage";
+        return "Record";
     }
     @GetMapping("/attendancereport/")
     public String reportDaily(Model model)
     {
-        List<Student> stulist=sturepo.findAll();
-        model.addAttribute("stulist",stulist);
-        return "AttendanceTable";
+        List<String>namelist=sturepo.findAll().stream().map(x->x.getLastname()).collect(Collectors.toList());
+        List<Integer>agelist=sturepo.findAll().stream().map(x->x.getAge()).collect(Collectors.toList());
+        model.addAttribute("name",namelist);
+        model.addAttribute("age",agelist);
+        return "pychart";
     }
+
     @GetMapping("/scancard/")
     public String markAttendance(Model model)
     {

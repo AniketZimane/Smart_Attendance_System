@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,12 +9,29 @@
 
 </head>
 <body>
-    <video id="preview"></video>
-    
+    <video id="preview" style="align:center"></video>
     <script type="text/javascript">
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-        console.log(content);
+        var beepsound = new Audio('/assets/sound/beep.wav');
+		beepsound.play();
+		var endpoint = '/emp/save/';
+		const date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var currentDate = `${day}-${month}-${year}`;
+        var tid=123456;
+            var data = {
+                dateTime:currentDate,
+                teacherId:tid,
+                studId:content,
+                department:'computer'
+            }
+
+
+        alert(data,"Your Attendance mark successfully");
       });
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
