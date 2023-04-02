@@ -1,6 +1,8 @@
 package com.example.Smart_Attendance_System.Controller;
 
+import com.example.Smart_Attendance_System.Dao.AttendanceRepo;
 import com.example.Smart_Attendance_System.Dao.StudentRepo;
+import com.example.Smart_Attendance_System.Entity.Attendance;
 import com.example.Smart_Attendance_System.Entity.Student;
 import com.example.Smart_Attendance_System.Helper.FileUploader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -23,6 +23,8 @@ public class StudentController {
     int maxSize=10;
     @Autowired
     StudentRepo sturepo;
+    @Autowired
+    AttendanceRepo attendanceRepo;
     @Autowired
     FileUploader uploader;
     @GetMapping("/")
@@ -122,6 +124,25 @@ public class StudentController {
     public String markAttendance(Model model)
     {
         return "ScanQr";
+    }
+
+    @GetMapping("/setting/")
+    public String setting(Model model)
+    {
+        return "Adminportal";
+    }
+    @RequestMapping(value = "/attendancemark/", method = RequestMethod.POST)
+    public @ResponseBody String handleRequest(@RequestParam("myParameter") String myParameter) {
+        System.out.println(myParameter);
+        return "Response from Java controller";
+    }
+
+    @PostMapping("/markattendance/stu/")
+    @ResponseBody
+    public Attendance addEmp(Model model, @RequestBody Attendance attendance)
+    {
+        Attendance empNew = attendanceRepo.save(attendance);
+        return empNew;
     }
 
 

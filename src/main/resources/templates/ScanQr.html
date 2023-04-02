@@ -15,20 +15,29 @@
       scanner.addListener('scan', function (content) {
         var beepsound = new Audio('/assets/sound/beep.wav');
 		beepsound.play();
-		var endpoint = '/emp/save/';
+<!--		var endpoint = '/emp/save/';-->
 		const date = new Date();
-
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        var currentDate = `${day}-${month}-${year}`;
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            var currentDate = `${day}-${month}-${year}`;
         var tid=123456;
-            var data = {
-                dateTime:currentDate,
-                teacherId:tid,
-                studId:content,
-                department:'computer'
+            $.ajax({
+                type: "POST",
+                url: "/my-java-controller",
+                data: { dateTime:currentDate,
+                    teacherId:tid,
+                    studId:content,
+                    department:'computer' },
+                success: function(response) {
+                console.log("Received response from Java controller:", response);
+                },
+            error: function(xhr, status, error) {
+                console.error("Error making request to Java controller:", error);
             }
+});
+
+
 
 
         alert(data,"Your Attendance mark successfully");
@@ -45,3 +54,5 @@
     </script>
 </body>
 </html>
+
+
