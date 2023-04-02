@@ -18,26 +18,15 @@ public class Attendance {
     Integer subId;
     Long teacherId;
     Long studId;
-    String department;
+
 
     public Attendance() {
     }
 
-    public Attendance(LocalDateTime dateTime, Long teacherId, Long studId,String department) {
-        this.dateTime = dateTime;
+    public Attendance(Integer subId, Long teacherId, Long studId) {
+        this.subId = subId;
         this.teacherId = teacherId;
         this.studId = studId;
-        this.department = department;
-    }
-
-
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
     }
 
     public Integer getId() {
@@ -56,6 +45,13 @@ public class Attendance {
         this.dateTime = dateTime;
     }
 
+    public Integer getSubId() {
+        return subId;
+    }
+
+    public void setSubId(Integer subId) {
+        this.subId = subId;
+    }
 
     public Long getTeacherId() {
         return teacherId;
@@ -78,10 +74,9 @@ public class Attendance {
         return "Attendance{" +
                 "id=" + id +
                 ", dateTime=" + dateTime +
+                ", subId=" + subId +
                 ", teacherId=" + teacherId +
                 ", studId=" + studId +
-                ", department='" + department + '\'' +
                 '}';
     }
-
 }

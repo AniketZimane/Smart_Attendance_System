@@ -1,7 +1,7 @@
 package com.example.Smart_Attendance_System.Controller;
 
-import com.example.Smart_Attendance_System.Dao.StudentRepo;
-import com.example.Smart_Attendance_System.Entity.Student;
+import com.example.Smart_Attendance_System.Dao.*;
+import com.example.Smart_Attendance_System.Entity.*;
 import com.example.Smart_Attendance_System.Helper.FileUploader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,11 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,11 +23,14 @@ public class StudentController {
     @Autowired
     StudentRepo sturepo;
     @Autowired
+    AttendanceRepo attendanceRepo;
+    @Autowired
     FileUploader uploader;
     @GetMapping("/")
-    public String dashboard()
+    public String dashboard(Model model)
     {
-
+        Long userCount = sturepo.count();
+        model.addAttribute("userCount", userCount);
         return "MainDashBoard";
     }
     @GetMapping("/database/")
@@ -50,8 +52,10 @@ public class StudentController {
     }
 
     @GetMapping("/generateid/")
-    public String generateId()
+    public String generateId(Model model, Student stu)
     {
+        Student fetch=sturepo.save(stu);
+        model.addAttribute("stu", fetch);
         return "GenerateId";
     }
     @PostMapping("/savedata/")
@@ -121,9 +125,34 @@ public class StudentController {
     @GetMapping("/scancard/")
     public String markAttendance(Model model)
     {
-        return "ScanQr";
+        return "lectureEntry";
     }
 
+    @GetMapping("/setting/")
+    public String setting(Model model)
+    {
+        return "deparmentreg";
+    }
+    @RequestMapping(value = "/attendancemark/", method = RequestMethod.POST)
+    public @ResponseBody String handleRequest(@RequestParam("myParameter") String myParameter) {
+        System.out.println(myParameter);
+        return "coursereg";
+    }
 
+    @PostMapping("/markattendance/")
+    @ResponseBody
+    public Integer addEmp(Model model,Long studId,Integer subId,Long teacherId)
+    {
+        int responce = 0;
+        List<Attendance> list = attendanceRepo.findByStudIdAndSubIdAndTeacherId(studId,subId,teacherId);
+        if(list.isEmpty())
+        {
+            Attendance attendance=new Attendance(subId,teacherId,studId);
+            Attendance at = attendanceRepo.save(attendance);
+            responce=1;
+        }
+
+        return responce;
+    }
 
 }
