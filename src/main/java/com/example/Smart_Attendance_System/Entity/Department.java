@@ -8,6 +8,7 @@ public class Department {
             @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "Dept_seq")
             @SequenceGenerator(name="Dept_seq")
     Integer id;
+    @Column(unique = true)
     String deptname;
 
     public Department() {

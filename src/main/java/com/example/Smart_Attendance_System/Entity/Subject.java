@@ -5,18 +5,19 @@ import jakarta.persistence.*;
 @Entity
 public class Subject {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_seq")
-    @SequenceGenerator(name="course_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "subject_seq")
+    @SequenceGenerator(name="subject_seq")
     Integer id;
+    @Column(unique = true)
     String name;
-    Integer subId;
+    Integer courseId;
 
     public Subject() {
     }
 
-    public Subject(String name, Integer subId) {
+    public Subject(String name,Integer courseId) {
         this.name = name;
-        this.subId = subId;
+        this.courseId = courseId;
     }
 
     public Integer getId() {
@@ -35,12 +36,12 @@ public class Subject {
         this.name = name;
     }
 
-    public Integer getSubId() {
-        return subId;
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setSubId(Integer subId) {
-        this.subId = subId;
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     @Override
@@ -48,7 +49,7 @@ public class Subject {
         return "Subject{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", subId=" + subId +
+                ", courseId=" + courseId +
                 '}';
     }
 }

@@ -63,13 +63,13 @@
                             <option value="Student" selected="">Student</option>
                             <option value="Teacher">Teacher</option>
                         </select></div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Enrollment No*</label><input class="form-control" type="text" name="enrollno" placeholder="Enter a Enrollment No" required=""></div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">First Name*</label><input class="form-control" type="text" placeholder="First Name" name="firstname" required=""></div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Last Name*</label><input class="form-control" type="text" placeholder="Last Name" name="lastname" required=""></div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Father Name*</label><input class="form-control" type="text" placeholder="Last Name" name="fathername" required=""></div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mother Name*</label><input class="form-control" type="text" placeholder="Last Name" name="mothername" required=""></div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">Enrollment No*</label><input class="form-control" type="text" name="enrollno" th:value="${stud?.enrollno}" placeholder="Enter a Enrollment No" required=""></div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3" style="margin-top: 12px;"><label class="form-label fw-bold">First Name*</label><input class="form-control" type="text" placeholder="First Name" name="firstname" th:value="${stud?.firstname}" required=""></div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Last Name*</label><input class="form-control" type="text" placeholder="Last Name" name="lastname" th:value="${stud?.lastname}" required=""></div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Father Name*</label><input class="form-control" type="text" placeholder="Last Name" name="fathername" th:value="${stud?.fathername}" required=""></div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mother Name*</label><input class="form-control" type="text" placeholder="Last Name" name="mothername" th:value="${stud?.mothername}" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enroll Year*</label><input class="form-control" type="date" name="enrollyear" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Birth Date*</label><input class="form-control" type="date" name="dob" required=""></div>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Birth Date*</label><input class="form-control" type="date" name="dob" th:value="${stud?.dob}" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Gender*</label><select class="form-select" name="gender" required="">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -82,11 +82,9 @@
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile No*</label><input class="form-control" type="text" placeholder="Mobile No" name="mobileno" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Collage/University Name*</label><input class="form-control" type="text" name="collagename" placeholder="Collage/University Name" inputmode="numeric" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Department*</label><select class="form-select" name="deptname" required="">
-                            <option value="Computer Engineering" selected="">Computer Engineering</option>
-                            <option value="Computer Engineering">Computer Engineering</option>
-                            <option value="Electrical Engineering">Electrical Engineering</option>
-                            <option value="Electronic and TelecommunicationEngineering">Electronic and TelecommunicationEngineering</option>
-                            <option value="Other">Other</option>
+                            <option value="Computer Engineering" th:selected="${stud?.deptname == 'Computer Engineering'}">Computer Engineering</option>
+                            <option value="Electrical Engineering" th:selected="${stud?.deptname == 'Electrical Engineering'}">Electrical Engineering</option>
+                            <option value="Electronic and TelecommunicationEngineering" th:selected="${stud?.deptname == 'Electronic and TelecommunicationEngineering'}">Electronic and TelecommunicationEngineering</option>
                         </select></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Semester*</label><select class="form-select" name="sem" required="">
                             <option value="1" selected="">1</option>

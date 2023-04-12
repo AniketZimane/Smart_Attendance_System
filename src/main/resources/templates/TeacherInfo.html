@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
     <link rel="stylesheet" href="/assets/css/Black-Navbar.css">
@@ -58,86 +59,17 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 
 <body>
-    <form method="post" action="/login">
-        <div class="d-flex flex-column justify-content-center" id="login-box">
-            <div class="login-box-header">
-                <h4 style="color: var(--bs-black);margin-bottom: 0px;font-weight: bold;font-size: 30px;font-family: Adamina, serif;background: var(--white-color);">Login Page</h4>
-            </div>
-
-            <div th:if="${param.error}" class="alert alert-danger">
-                Invalid username and password.
-            </div>
-            <div th:if="${param.logout}" class="alert alert-success">
-                You have been logged out.
-            </div>
-
-            <div class="d-flex flex-row align-items-center login-box-seperator-container">
-                <div class="login-box-seperator"></div>
-                <div class="login-box-seperator-text"></div>
-                <div class="login-box-seperator"></div>
-            </div>
-            <div class="email-login" style="background-color: #ffffff;"><input class="form-control email-imput form-control" type="text" style="margin-top: 10px;" required="" placeholder="enrollno" minlength="6" name="username"><input class="form-control password-input form-control" type="password" style="margin-top: 10px;" required="" placeholder="Password" minlength="6" name="password"></div>
-            <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;"><button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
-                <div class="d-flex justify-content-between">
-                    <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember_me" style="cursor: pointer;" name="remember_me"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div><a id="forgot-password-link" href="#">Forgot Password?</a>
-                </div>
-            </div>
-            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
-                <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#">Sign Up!</a></p>
+    <div class="d-lg-flex justify-content-lg-center">
+        <div class="card border rounded" style="margin: -2px;margin-top: 100px;width: 504.6px;">
+            <div class="card-body" style="height: 300px;box-shadow: 10px 10px 18px 0px var(--bs-black);">
+                <h4 class="card-title" style="font-style: italic;font-family: Aladin, serif;" th:text="'Teacher Name:-'+tech.name">Teacher Name:-</h4>
+                <h4 class="card-title" style="font-family: Aladin, serif;font-style: italic;" th:text="'Subject Name:-'+sub.name">Subject Name:-</h4>
             </div>
         </div>
-    </form>
-    <script>
-        var endpoint = '/verifyLogin/';
-            var data = {
-                params:
-                {
-                    enrollno: enrollno,
-                    password: password
-
-                }
-            }
-
-            axios.post(endpoint, null, data)
-                .then(function(response) {
-
-                    if(response.data==0)
-                    {
-                           Swal.fire({
-                              icon: 'warning',
-                              title: 'Already marked',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-                    }
-                    else
-                    {
-                          Swal.fire({
-                              icon: 'success',
-                              title: 'Attendance Mark Successfully',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-                    }
-
-                })
-                .catch(function(error) {
-                var warning = new Audio('/assets/sound/beep-warning.wav');
-                    console.log(error);
-                    warning.play();
-                    Swal.fire({
-                              icon: 'error',
-                              title: 'something went wrong',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-
-    </script>
+    </div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
     <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
@@ -162,8 +94,6 @@
     <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </body>
 
 </html>

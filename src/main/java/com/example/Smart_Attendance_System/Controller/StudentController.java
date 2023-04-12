@@ -3,17 +3,31 @@ package com.example.Smart_Attendance_System.Controller;
 import com.example.Smart_Attendance_System.Dao.*;
 import com.example.Smart_Attendance_System.Entity.*;
 import com.example.Smart_Attendance_System.Helper.FileUploader;
+import com.example.Smart_Attendance_System.Helper.Utils;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,11 +40,40 @@ public class StudentController {
     AttendanceRepo attendanceRepo;
     @Autowired
     FileUploader uploader;
-    @GetMapping("/")
+
+    @Autowired
+    CourseRepo courseRepo;
+    @Autowired
+    SubjectRepo subjectRepo;
+    @Autowired
+    TeacherRepo teacherRepo;
+    @Autowired
+    DeparmentRepo deparmentRepo;
+    @Autowired
+    LecturesRepo lecturesRepo;
+
+    @Autowired
+    StudentRepo studentRepo;
+    @Autowired
+    JavaMailSender mailSender;
+
+    @GetMapping("/admindashboard/")
     public String dashboard(Model model)
     {
         Long userCount = sturepo.count();
+        Long courseCount = courseRepo.count();
+        Long teacherCount = teacherRepo.count();
+        Long departmentCount = deparmentRepo.count();
+        Long subjectCount = subjectRepo.count();
+        List<Integer>teacherid=lecturesRepo.findAll().stream().map(x->x.getTeacherId()).collect(Collectors.toList());
+        List<Integer>totallectures=lecturesRepo.findAll().stream().map(x->x.getTotalLectures()).collect(Collectors.toList());
+        model.addAttribute("teacherid", teacherid);
+        model.addAttribute("totallectures", totallectures);
         model.addAttribute("userCount", userCount);
+        model.addAttribute("courseCount", courseCount);
+        model.addAttribute("teacherCount", teacherCount);
+        model.addAttribute("departmentCount", departmentCount);
+        model.addAttribute("subjectCount", subjectCount);
         return "MainDashBoard";
     }
     @GetMapping("/database/")
@@ -39,7 +82,7 @@ public class StudentController {
 
         return "Record";
     }
-    @GetMapping("/login/")
+    @GetMapping("/login")
     public String login()
     {
 
@@ -51,6 +94,14 @@ public class StudentController {
         return "Registration";
     }
 
+    @GetMapping("/student/edit/{enrollno}/")
+    public String editStudent(Model model, @PathVariable long enrollno)
+    {
+        Student stud = studentRepo.getReferenceById(enrollno);
+        model.addAttribute("stud", stud);
+        return "Registration";
+    }
+
     @GetMapping("/generateid/")
     public String generateId(Model model, Student stu)
     {
@@ -59,8 +110,7 @@ public class StudentController {
         return "GenerateId";
     }
     @PostMapping("/savedata/")
-    public String submitData(Model model, Student stu, MultipartFile file)
-    {
+    public String submitData(Model model, Student stu, MultipartFile file) throws MessagingException, UnsupportedEncodingException {
         String fileNameOld;
         fileNameOld = file.getOriginalFilename();
         String extension = fileNameOld.substring(fileNameOld.indexOf(".") + 1);
@@ -83,6 +133,37 @@ public class StudentController {
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("curPage", 1);
         model.addAttribute("msg","Employee saved successfully");
+
+        String from = "ad.developer@gmail.com";
+        String to = stuNew.getEmailid();
+//        SimpleMailMessage message=new SimpleMailMessage();
+//        message.setFrom(from);
+//        message.setTo(to);
+//        String maiSubject="To verifying attendence";
+//        String mailContent="";
+//        message.setSubject(maiSubject);
+//        message.setText(mailContent);
+//        mailSender.send(message);
+        MimeMessage message=mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        String maiSubject="To verifying attendence";
+        String mailContent="<h1>Welcome to Smart Innovative THings</h1><br><p>Your Registration Completed successfully</p>";
+        mailContent+= "<a href='https://localhost:8080'><a/>";
+        helper.setFrom(from,"Innovative Things");
+        helper.setTo(to);
+        helper.setSubject(maiSubject);
+        helper.setText(mailContent,true);
+
+//        helper.addAttachment("/assets/img/swiftui.png", new ClassPathResource("/assets/img/swiftui.png"));
+        try
+        {
+            FileSystemResource res = new FileSystemResource(new ClassPathResource("static/assets/img/logo.png").getFile());
+            helper.addInline("swiftui.png", res);
+            mailSender.send(message);
+        }catch (Exception e)
+        {
+            System.out.println(e);
+        }
         return "GenerateId";
 
     }
@@ -94,6 +175,8 @@ public class StudentController {
         Page<Student> page = sturepo.findAll(pageable);
         int totalPages = page.getTotalPages();
         List<Student> listEmp = page.toList();
+        List<Student> stulist=sturepo.findAll();
+        model.addAttribute("stulist",stulist);
 
         if(totalPages < 1)
         {
@@ -103,13 +186,35 @@ public class StudentController {
         model.addAttribute("listEmp", listEmp);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("curPage", 1);
-        return "RecordPage";
+        return "Record";
     }
-    @GetMapping("/record/")
-    public String displayRecode(Model model)
+    @GetMapping("/sub/delete/{subId}/")
+    public String subjectDelete(Model model, @PathVariable Integer subId)
     {
-        List<Student> stulist=sturepo.findAll();
+        subjectRepo.deleteById(subId);
+        Pageable pageable = PageRequest.of(0, maxSize, Sort.by("id").descending());
+        Page<Subject> page = subjectRepo.findAll(pageable);
+        int totalPages = page.getTotalPages();
+        List<Subject> listsub = page.toList();
+        List<Subject> sublist=subjectRepo.findAll();
+        model.addAttribute("sublist",sublist);
+
+        if(totalPages < 1)
+        {
+            totalPages = 1;
+        }
+
+        model.addAttribute("listsub", listsub);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("curPage", 1);
+        return "subjectreg";
+    }
+    @GetMapping("/record/{colName}/")
+    public String displayRecode(Model model, @PathVariable String colName)
+    {
+        List<Student> stulist=sturepo.findAll(Sort.by(colName));
         model.addAttribute("stulist",stulist);
+        model.addAttribute("colName",colName);
         return "Record";
     }
     @GetMapping("/attendancereport/")
@@ -125,13 +230,29 @@ public class StudentController {
     @GetMapping("/scancard/")
     public String markAttendance(Model model)
     {
+        List<Department> departmentList=deparmentRepo.findAll();
+        List<Teacher> teacherList=teacherRepo.findAll();
+        System.out.println(departmentList);
+        List<Course> courseList=courseRepo.findAll();
+        List<Subject> subjectList=subjectRepo.findAll();
+        List<Lectures> lecturesList=lecturesRepo.findAll();
+        System.out.println(lecturesList);
+        model.addAttribute("departmentList",lecturesList);
+        model.addAttribute("teacherList",teacherList);
+
+        model.addAttribute("departmentList",departmentList);
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("subjectList",subjectList);
         return "lectureEntry";
     }
 
     @GetMapping("/setting/")
-    public String setting(Model model)
+    public String setting(Model model,Department dept)
     {
-        return "deparmentreg";
+        List<Department> departmentList=deparmentRepo.findAll();
+        System.out.println(departmentList);
+        model.addAttribute("departmentList",departmentList);
+        return "departmentreg";
     }
     @RequestMapping(value = "/attendancemark/", method = RequestMethod.POST)
     public @ResponseBody String handleRequest(@RequestParam("myParameter") String myParameter) {
@@ -141,18 +262,39 @@ public class StudentController {
 
     @PostMapping("/markattendance/")
     @ResponseBody
-    public Integer addEmp(Model model,Long studId,Integer subId,Long teacherId)
+    public Integer addEmp(Model model, Long enrollno, Integer subId, Long teacherId, String startTime, String endTime,String email)
     {
+        Student stud = studentRepo.getReferenceById(enrollno);
+        //following line mark attendence if record is present(email)
+        email=stud.getEmailid().toString();
+        System.out.println(email);
+        LocalDateTime conStartTime = LocalDateTime.parse(startTime, Utils.formatter);
+        LocalDateTime conEndTime = LocalDateTime.parse(endTime, Utils.formatter);
+
         int responce = 0;
-        List<Attendance> list = attendanceRepo.findByStudIdAndSubIdAndTeacherId(studId,subId,teacherId);
+        List<Attendance> list = attendanceRepo.findByenrollnoAndSubIdAndTeacherIdAndStartTimeAndEndTime(enrollno,subId,teacherId,conStartTime, conEndTime);
+
         if(list.isEmpty())
         {
-            Attendance attendance=new Attendance(subId,teacherId,studId);
+
+            Attendance attendance=new Attendance(subId,teacherId,enrollno,conStartTime,conEndTime,email);
             Attendance at = attendanceRepo.save(attendance);
             responce=1;
         }
 
         return responce;
     }
+    @GetMapping("/GenerateAttendenceReport/")
+    public String atRecord(Model model)
+    {
+        List<Attendance> attendedList=attendanceRepo.findAll();
+
+        System.out.println(attendedList);
+        model.addAttribute("attendedList",attendedList);
+        return "AttendanceTable";
+    }
+
+
+
 
 }

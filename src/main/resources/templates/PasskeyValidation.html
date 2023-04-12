@@ -16,11 +16,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
     <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
     <link rel="stylesheet" href="/assets/css/Black-Navbar.css">
+    <link rel="stylesheet" href="/assets/css/Card-Store.css">
     <link rel="stylesheet" href="/assets/css/Collapsible-Sidebar.css">
     <link rel="stylesheet" href="/assets/css/Dark-Mode-Switch.css">
     <link rel="stylesheet" href="/assets/css/FORM.css">
@@ -30,8 +32,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" href="/assets/css/Login-Box-En-login-box-en.css">
-    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient-Blue-gradient-login-form.css">
-    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient.css">
     <link rel="stylesheet" href="/assets/css/login-form-styles.css">
     <link rel="stylesheet" href="/assets/css/login-form.css">
     <link rel="stylesheet" href="/assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
@@ -42,8 +42,6 @@
     <link rel="stylesheet" href="/assets/css/MUSA_form-wizard-form-wizard.css">
     <link rel="stylesheet" href="/assets/css/MUSA_form-wizard.css">
     <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
-    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form-styles.css">
-    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form.css">
     <link rel="stylesheet" href="/assets/css/Pretty-Login-Form-.css">
     <link rel="stylesheet" href="/assets/css/Responsive-Active-Navbar.css">
     <link rel="stylesheet" href="/assets/css/select.css">
@@ -58,86 +56,25 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 
-<body>
-    <form method="post" action="/login">
-        <div class="d-flex flex-column justify-content-center" id="login-box">
-            <div class="login-box-header">
-                <h4 style="color: var(--bs-black);margin-bottom: 0px;font-weight: bold;font-size: 30px;font-family: Adamina, serif;background: var(--white-color);">Login Page</h4>
-            </div>
-
-            <div th:if="${param.error}" class="alert alert-danger">
-                Invalid username and password.
-            </div>
-            <div th:if="${param.logout}" class="alert alert-success">
-                You have been logged out.
-            </div>
-
-            <div class="d-flex flex-row align-items-center login-box-seperator-container">
-                <div class="login-box-seperator"></div>
-                <div class="login-box-seperator-text"></div>
-                <div class="login-box-seperator"></div>
-            </div>
-            <div class="email-login" style="background-color: #ffffff;"><input class="form-control email-imput form-control" type="text" style="margin-top: 10px;" required="" placeholder="enrollno" minlength="6" name="username"><input class="form-control password-input form-control" type="password" style="margin-top: 10px;" required="" placeholder="Password" minlength="6" name="password"></div>
-            <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;"><button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
-                <div class="d-flex justify-content-between">
-                    <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember_me" style="cursor: pointer;" name="remember_me"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div><a id="forgot-password-link" href="#">Forgot Password?</a>
+<body style="margin-top: 0px;padding-left: 0px;">
+<div th:replace="LatestFragment.html :: registration"></div>
+    <div class="d-lg-flex justify-content-lg-center">
+        <div class="card" style="width: 21rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 2px 2px 16px 8px rgba(0,0,0,0.1);min-width: 300px;border-style: none;max-width: 100%;margin: 16px;">
+            <div class="card-body d-flex flex-column justify-content-between" style="padding-bottom: 20px;height: auto;">
+                <div>
+                    <h4 class="d-lg-flex justify-content-lg-center" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: var(--first-color);margin-bottom: 8px;margin-top: 22px;">Enter your Passkey</h4>
                 </div>
-            </div>
-            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
-                <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#">Sign Up!</a></p>
+                <form method="post" action="/VerifyAttendence/">
+                    <div class="d-lg-flex justify-content-lg-center">
+                        <input name="passkeyField" class="border rounded d-lg-flex justify-content-lg-center" type="number" style="height: auto;width: auto;font-size: 20px;">
+                    </div><button class="btn btn-primary d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" role="button" data-bss-hover-animate="pulse" style="margin-top: 20px;background: #128C7E;border-style: none;padding-top: 8px;padding-bottom: 8px;box-shadow: 2px 2px 8px rgba(117,117,117,0.71);width: auto;" type="submit" >Verify</button>
+
+                </form>
             </div>
         </div>
-    </form>
-    <script>
-        var endpoint = '/verifyLogin/';
-            var data = {
-                params:
-                {
-                    enrollno: enrollno,
-                    password: password
-
-                }
-            }
-
-            axios.post(endpoint, null, data)
-                .then(function(response) {
-
-                    if(response.data==0)
-                    {
-                           Swal.fire({
-                              icon: 'warning',
-                              title: 'Already marked',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-                    }
-                    else
-                    {
-                          Swal.fire({
-                              icon: 'success',
-                              title: 'Attendance Mark Successfully',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-                    }
-
-                })
-                .catch(function(error) {
-                var warning = new Audio('/assets/sound/beep-warning.wav');
-                    console.log(error);
-                    warning.play();
-                    Swal.fire({
-                              icon: 'error',
-                              title: 'something went wrong',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-
-    </script>
+    </div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
     <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
@@ -162,8 +99,6 @@
     <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </body>
 
 </html>

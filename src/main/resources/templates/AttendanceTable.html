@@ -90,23 +90,27 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th class="text-center">Enrollment No</th>
-                                    <th class="text-center">Name</th>
-                                    <th class="text-center">Subject</th>
-                                    <th class="text-center">Teacher Name</th>
-                                    <th class="text-center">Duration</th>
-                                    <th class="text-center">Attended Time</th>
-                                    <th class="text-center filter-false sorter-false">Acciones</th>
+                                    <th class="text-center">Subject ID</th>
+                                    <th class="text-center">Teacher Id</th>
+                                    <th class="text-center">Start Time</th>
+                                    <th class="text-center">End Time</th>
+                                    <th class="text-center">Attendance Time</th>
+<!--                                    <th class="text-center">Date</th>-->
+<!--                                    <th class="text-center filter-false sorter-false">Action</th>-->
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr>
-                                    <td>Ana</td>
-                                    <td>Diseñador</td>
-                                    <td>Diseño</td>
-                                    <td>Diseño</td>
-                                    <td>Diseño</td>
-                                    <td>Diseño</td>
-                                    <td class="text-center align-middle" style="max-height: 60px;height: 60px;"><a class="btn btnMaterial btn-flat primary semicircle" role="button" href="#"><i class="far fa-eye"></i></a><a class="btn btnMaterial btn-flat success semicircle" role="button" href="#"><i class="fas fa-pen"></i></a><a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#"><i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i></a></td>
+                            <tr style="background: var(--bs-card-bg);" th:each="stud : ${attendedList}">
+                                    <td th:text="${stud.enrollno}">1234567890</td>
+                                    <td th:text="${stud.subId}">Java</td>
+                                    <td th:text="${stud.teacherId}">Parulekar sir</td>
+                                    <td th:text="${stud.startTime}">Parulekar sir</td>
+                                    <td th:text="${stud.endTime}">Parulekar sir</td>
+                                    <td th:text="${stud.attendanceTime}">Parulekar sir</td>
+                                    <td class="text-center align-middle" style="max-height: 60px;height: 60px;">
+<!--                                        <a class="btn btnMaterial btn-flat primary semicircle"  th:href="@{/attendencemarkdetails/{subId}/{teacherId}/(subId = ${stud.subId})/(teacherId = ${stud.teacherId})}"><i class="far fa-eye"></i></a>-->
+<!--                                        <a class="btn btnMaterial btn-flat success semicircle" role="button" href="#"><i class="fas fa-pen"></i></a>-->
+<!--                                        <a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#"><i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i></a></td>-->
                                 </tr>
                             </tbody>
                         </table>

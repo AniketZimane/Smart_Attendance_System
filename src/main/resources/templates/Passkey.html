@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -16,11 +17,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
     <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
     <link rel="stylesheet" href="/assets/css/Black-Navbar.css">
+    <link rel="stylesheet" href="/assets/css/Card-Store.css">
     <link rel="stylesheet" href="/assets/css/Collapsible-Sidebar.css">
     <link rel="stylesheet" href="/assets/css/Dark-Mode-Switch.css">
     <link rel="stylesheet" href="/assets/css/FORM.css">
@@ -30,8 +34,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" href="/assets/css/Login-Box-En-login-box-en.css">
-    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient-Blue-gradient-login-form.css">
-    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient.css">
     <link rel="stylesheet" href="/assets/css/login-form-styles.css">
     <link rel="stylesheet" href="/assets/css/login-form.css">
     <link rel="stylesheet" href="/assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
@@ -42,8 +44,6 @@
     <link rel="stylesheet" href="/assets/css/MUSA_form-wizard-form-wizard.css">
     <link rel="stylesheet" href="/assets/css/MUSA_form-wizard.css">
     <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
-    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form-styles.css">
-    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form.css">
     <link rel="stylesheet" href="/assets/css/Pretty-Login-Form-.css">
     <link rel="stylesheet" href="/assets/css/Responsive-Active-Navbar.css">
     <link rel="stylesheet" href="/assets/css/select.css">
@@ -58,48 +58,13 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-</head>
-
-<body>
-    <form method="post" action="/login">
-        <div class="d-flex flex-column justify-content-center" id="login-box">
-            <div class="login-box-header">
-                <h4 style="color: var(--bs-black);margin-bottom: 0px;font-weight: bold;font-size: 30px;font-family: Adamina, serif;background: var(--white-color);">Login Page</h4>
-            </div>
-
-            <div th:if="${param.error}" class="alert alert-danger">
-                Invalid username and password.
-            </div>
-            <div th:if="${param.logout}" class="alert alert-success">
-                You have been logged out.
-            </div>
-
-            <div class="d-flex flex-row align-items-center login-box-seperator-container">
-                <div class="login-box-seperator"></div>
-                <div class="login-box-seperator-text"></div>
-                <div class="login-box-seperator"></div>
-            </div>
-            <div class="email-login" style="background-color: #ffffff;"><input class="form-control email-imput form-control" type="text" style="margin-top: 10px;" required="" placeholder="enrollno" minlength="6" name="username"><input class="form-control password-input form-control" type="password" style="margin-top: 10px;" required="" placeholder="Password" minlength="6" name="password"></div>
-            <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;"><button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
-                <div class="d-flex justify-content-between">
-                    <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember_me" style="cursor: pointer;" name="remember_me"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div><a id="forgot-password-link" href="#">Forgot Password?</a>
-                </div>
-            </div>
-            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
-                <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#">Sign Up!</a></p>
-            </div>
-        </div>
-    </form>
-    <script>
-        var endpoint = '/verifyLogin/';
+    <script type="text/javascript">
+		var endpoint = '/VerifyAttendence/';
             var data = {
                 params:
                 {
-                    enrollno: enrollno,
-                    password: password
-
+                    passkey: [[${otp}]],
+                    emails: [[${emailList}]]
                 }
             }
 
@@ -110,7 +75,7 @@
                     {
                            Swal.fire({
                               icon: 'warning',
-                              title: 'Already marked',
+                              title: 'Already Send',
                               showConfirmButton: false,
                               timer: 3000
                         });
@@ -127,8 +92,6 @@
 
                 })
                 .catch(function(error) {
-                var warning = new Audio('/assets/sound/beep-warning.wav');
-                    console.log(error);
                     warning.play();
                     Swal.fire({
                               icon: 'error',
@@ -136,8 +99,38 @@
                               showConfirmButton: false,
                               timer: 3000
                         });
-
-    </script>
+</script>
+</head>
+<body style="padding-left: 0px;padding-right: 0px;margin-top: 0px;background: var(--white-color);">
+<div th:replace="LatestFragment.html :: registration"></div>
+<!--    <nav class="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button" style="background: rgb(34, 34, 34);border-radius: 20;border-top-left-radius: 20;border-top-right-radius: 20;border-bottom-right-radius: 20;border-bottom-left-radius: 20;border-style: none;padding-top: 0px;padding-bottom: 0px;margin: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 0px;margin-top: 0px;">-->
+<!--        <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>-->
+<!--            <div><a class="navbar-brand" href="#"><span>Creativarian </span> </a></div>-->
+<!--            <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">-->
+<!--                <ul class="navbar-nav nav-right">-->
+<!--                    <li class="nav-item"><a class="nav-link active" href="index.html" style="color: rgba(224,217,217,0.9);">home </a></li>-->
+<!--                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="color: rgba(224,217,217,0.9);">Services </a>-->
+<!--                        <div class="dropdown-menu"><a class="dropdown-item" href="services.html">Price Packages</a><a class="dropdown-item" href="#">Order Services</a><a class="dropdown-item" href="#">Custom Request</a></div>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="about.html" style="color: rgba(224,217,217,0.9);">about </a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="faq.html" style="color: rgba(224,217,217,0.9);">faq </a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="contact.html" style="color: rgba(224,217,217,0.9);">contact </a></li>-->
+<!--                </ul>-->
+<!--                <p class="ms-auto navbar-text actions" style="text-align: right;"><a class="login" href="Login.html" style="color: rgba(224,217,217,0.9);">Log In</a> <a class="btn btn-light action-button" role="button" href="signup.html" style="color: rgba(0,0,0,0.9);background: var(&#45;&#45;bs-gray-200);border-radius: 10px;border-style: solid;border-color: rgba(0,0,0,0.9);font-size: 16px;padding: 5px 8px;">Sign Up</a></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </nav>-->
+    <div class="d-lg-flex justify-content-lg-center">
+        <div class="card d-lg-flex justify-content-lg-center" style="width: 21rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 2px 2px 16px 8px rgba(0,0,0,0.1);min-width: 300px;border-style: none;max-width: 100%;margin: 16px;">
+            <div class="card-body border rounded d-flex flex-column justify-content-center align-items-lg-center" style="padding-bottom: 20px;height: 290px;background: var(--bs-gray-100);">
+                <div>
+                    <h6 th:text="${'Attended Student: ' + atcount}" class="text-muted d-inline d-lg-flex justify-content-lg-start mb-2" style="color: #757575;font-size: 20px;font-family: 'Source Sans Pro', sans-serif;font-weight: 600;border-bottom-right-radius: 10px;border-top-right-radius: 10px;margin-left: -20px;padding-left: 20px;padding-right: 8px;padding-bottom: 2px;background: #cdcf66;padding-top: 2px;text-align: left;">R$80,00 a R$300,00</h6>
+                    <h2 style="text-align: center;padding-top: 17px;margin-top: 0px;font-family: Adamina, serif;">Passkey</h2>
+                    <h4 th:text="${otp}" class="text-center" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);margin-bottom: 8px;margin-top: 22px;">123456</h4>
+                </div><a class="btn btn-primary d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" href="/verifypasskey/" data-bss-hover-animate="pulse" style="margin-top: 20px;background: #128C7E;border-style: none;padding-top: 8px;padding-bottom: 8px;box-shadow: 2px 2px 8px rgba(117,117,117,0.71);" target="_blank"><i class="fas fa-mail-bulk" style="color: rgb(255,255,255);font-size: 25px;margin-right: 16px;"></i>Send Verification Link</a>
+            </div>
+        </div>
+    </div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
     <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
@@ -162,8 +155,6 @@
     <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </body>
 
 </html>

@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
     <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
@@ -30,8 +29,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" href="/assets/css/Login-Box-En-login-box-en.css">
-    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient-Blue-gradient-login-form.css">
-    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient.css">
     <link rel="stylesheet" href="/assets/css/login-form-styles.css">
     <link rel="stylesheet" href="/assets/css/login-form.css">
     <link rel="stylesheet" href="/assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
@@ -42,8 +39,6 @@
     <link rel="stylesheet" href="/assets/css/MUSA_form-wizard-form-wizard.css">
     <link rel="stylesheet" href="/assets/css/MUSA_form-wizard.css">
     <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
-    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form-styles.css">
-    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form.css">
     <link rel="stylesheet" href="/assets/css/Pretty-Login-Form-.css">
     <link rel="stylesheet" href="/assets/css/Responsive-Active-Navbar.css">
     <link rel="stylesheet" href="/assets/css/select.css">
@@ -58,86 +53,27 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 
-<body>
-    <form method="post" action="/login">
-        <div class="d-flex flex-column justify-content-center" id="login-box">
-            <div class="login-box-header">
-                <h4 style="color: var(--bs-black);margin-bottom: 0px;font-weight: bold;font-size: 30px;font-family: Adamina, serif;background: var(--white-color);">Login Page</h4>
-            </div>
-
-            <div th:if="${param.error}" class="alert alert-danger">
-                Invalid username and password.
-            </div>
-            <div th:if="${param.logout}" class="alert alert-success">
-                You have been logged out.
-            </div>
-
-            <div class="d-flex flex-row align-items-center login-box-seperator-container">
-                <div class="login-box-seperator"></div>
-                <div class="login-box-seperator-text"></div>
-                <div class="login-box-seperator"></div>
-            </div>
-            <div class="email-login" style="background-color: #ffffff;"><input class="form-control email-imput form-control" type="text" style="margin-top: 10px;" required="" placeholder="enrollno" minlength="6" name="username"><input class="form-control password-input form-control" type="password" style="margin-top: 10px;" required="" placeholder="Password" minlength="6" name="password"></div>
-            <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;"><button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
-                <div class="d-flex justify-content-between">
-                    <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember_me" style="cursor: pointer;" name="remember_me"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div><a id="forgot-password-link" href="#">Forgot Password?</a>
-                </div>
-            </div>
-            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
-                <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#">Sign Up!</a></p>
+<body style="padding-left: 0px;margin-top: 0px;padding-right: 0px;color: var(--white-color);">
+<div th:fragment="registration">
+    <nav class="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button" style="background: var(--first-color);border-radius: 20;border-top-left-radius: 20;border-top-right-radius: 20;border-bottom-right-radius: 20;border-bottom-left-radius: 20;border-style: none;padding-top: 0;padding-bottom: 10px;">
+        <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div><a class="navbar-brand" href="/admindashboard/"><span style="font-family: Adamina, serif;font-size: 20px;color: var(--white-color);">Innovative Things</span> </a></div>
+            <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
+                <ul class="navbar-nav nav-right">
+                    <li class="nav-item"><a class="nav-link active" href="/departmentRegistration/" style="color: rgba(224,217,217,0.9);">Department Registration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/courseRegistration/" style="color: rgba(224,217,217,0.9);">Course Registration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subjectRegistration/" style="color: rgba(224,217,217,0.9);">Subject Registration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/teacherRegistration/" style="color: rgba(224,217,217,0.9);">Teacher Registration</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/passkey/" style="color: rgba(224,217,217,0.9);">Passkey</a></li>
+                </ul>
+                <p class="ms-auto navbar-text actions" style="text-align: right;"><a class="login" href="Login.html" style="color: rgba(224,217,217,0.9);">Log In</a> <a class="btn btn-light action-button" role="button" href="/logout/" style="color: rgba(0,0,0,0.9);background: var(--bs-gray-200);border-radius: 10px;border-style: solid;border-color: rgba(0,0,0,0.9);font-size: 16px;padding: 5px 8px;">Logout</a></p>
             </div>
         </div>
-    </form>
-    <script>
-        var endpoint = '/verifyLogin/';
-            var data = {
-                params:
-                {
-                    enrollno: enrollno,
-                    password: password
+    </nav>
+</div>
 
-                }
-            }
-
-            axios.post(endpoint, null, data)
-                .then(function(response) {
-
-                    if(response.data==0)
-                    {
-                           Swal.fire({
-                              icon: 'warning',
-                              title: 'Already marked',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-                    }
-                    else
-                    {
-                          Swal.fire({
-                              icon: 'success',
-                              title: 'Attendance Mark Successfully',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-                    }
-
-                })
-                .catch(function(error) {
-                var warning = new Audio('/assets/sound/beep-warning.wav');
-                    console.log(error);
-                    warning.play();
-                    Swal.fire({
-                              icon: 'error',
-                              title: 'something went wrong',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-
-    </script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
     <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
@@ -162,8 +98,6 @@
     <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </body>
 
 </html>

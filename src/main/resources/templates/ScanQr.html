@@ -15,17 +15,24 @@
 <body>
     <video id="preview" style="align:center"></video>
     <script type="text/javascript">
+<!--      var beepsound = new Audio('/assets/sound/beep.wav');-->
+<!--      var warning = new Audio('/assets/sound/beep-warning.wav');-->
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-      scanner.addListener('scan', function (content) {
-        var beepsound = new Audio('/assets/sound/beep.wav');
-		beepsound.play();
+
+      scanner.addListener('scan', function (content)
+      {
+
+
+
 		var endpoint = '/markattendance/';
             var data = {
                 params:
                 {
-                    teacherId: 1000,
-                    subId: 101,
-                    studId: content.replace('AttendanceId:','')
+                    teacherId: [[${idTeacher}]],
+                    subId: [[${idSub}]],
+                    enrollno: content.replace('AttendanceId:',''),
+                    startTime: '[[${startTime}]]',
+                    endTime: '[[${endTime}]]'
                 }
             }
 
@@ -34,6 +41,8 @@
 
                     if(response.data==0)
                     {
+                    var warning = new Audio('/assets/sound/beep-warning.wav');
+                    warning.play();
                            Swal.fire({
                               icon: 'warning',
                               title: 'Already marked',
@@ -43,6 +52,8 @@
                     }
                     else
                     {
+                    var beepsound = new Audio('/assets/sound/beep.wav');
+		                beepsound.play();
                           Swal.fire({
                               icon: 'success',
                               title: 'Attendance Mark Successfully',
@@ -53,7 +64,9 @@
 
                 })
                 .catch(function(error) {
+                var warning = new Audio('/assets/sound/beep-warning.wav');
                     console.log(error);
+                    warning.play();
                     Swal.fire({
                               icon: 'error',
                               title: 'something went wrong',

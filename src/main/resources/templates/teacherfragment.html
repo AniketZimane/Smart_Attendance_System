@@ -16,8 +16,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
     <link rel="stylesheet" href="/assets/css/Collapsible-Sidebar.css">
+    <link rel="stylesheet" href="/assets/css/Dark-Mode-Switch.css">
     <link rel="stylesheet" href="/assets/css/FORM.css">
     <link rel="stylesheet" href="/assets/css/Gamanet_Sidebar_bs5.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -36,6 +41,7 @@
     <link rel="stylesheet" href="/assets/css/MUSA_form-wizard.css">
     <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
     <link rel="stylesheet" href="/assets/css/Pretty-Login-Form-.css">
+    <link rel="stylesheet" href="/assets/css/Responsive-Active-Navbar.css">
     <link rel="stylesheet" href="/assets/css/select.css">
     <link rel="stylesheet" href="/assets/css/side-menu.css">
     <link rel="stylesheet" href="/assets/css/sidebar-1-style4.css">
@@ -50,18 +56,31 @@
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
 </head>
 
-<body class="d-flex d-lg-flex align-items-sm-start justify-content-lg-center">
-    <form method="post" action="/departmentdata/" style="width: 549px;margin-left: 50px;">
-        <div class="col-md-8" style="width: 512px;padding-right: -1px;padding-left: 0px;">
-            <h1 class="text-center" style="font-size: 40px;font-family: Aladin, serif;">Department Registration</h1>
-            <hr>
-            <div class="form-group mb-3"><input class="border rounded-0 form-control" type="text" name="deptname" style="margin-bottom: 15px;" placeholder="Departmnet Name"><input class="border rounded form-control" type="submit" name="save" style="margin-top: 15px;background-color: #00baff;color: rgb(255,255,255);" value="Save"></div>
+<body style="color: var(--bs-blue);margin-top: 0px;padding-left: 0px;">
+<div th:fragment="navbar2">
+    <nav class="text-primary d-md-flex navbar navbar-expand-custom navbar-mainbg" style="background: var(--bs-blue);height: auto;width: auto;margin-bottom: 0px;margin-right: -16px;"><a class="navbar-brand navbar-logo" href="#" style="font-family: Adamina, serif;font-size: 20px;">Innovative Things</a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-bs-label="Toggle navigation"><i class="fa fa-th-list fas fa-bars text-white"></i></button>
+        <div class="d-lg-flex justify-content-lg-end collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <div class="hori-selector">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                </div>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-star fas fa-tachometer-alt"></i>Dashboard</a></li>
+                <li class="nav-item active"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-star far fa-address-book"></i>Department Registration</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fa fa-star far fa-clone"></i>Course Registration</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="far fa-calendar far fa-calendar-alt"></i>Subject Registration</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0);"><i class="fas fa-chalkboard-teacher far fa-chart-bar"></i>Teacher Registration</a></li>
+                <li class="nav-item"></li>
+            </ul>
         </div>
-    </form>
+    </nav>
+</div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
     <script src="/assets/js/Billing-Table-with-Add-Row--Fixed-Header-Feature-Billing-Table-with-Add-Row--Fixed-Header.js"></script>
     <script src="/assets/js/Collapsible-Sidebar-Sidebar.js"></script>
+    <script src="/assets/js/Dark-Mode-Switch-darkmode.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
@@ -77,6 +96,7 @@
     <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-theme.js"></script>
     <script src="/assets/js/Multi-step-form-script.js"></script>
     <script src="/assets/js/MUSA_form-wizard-form-wizard.js"></script>
+    <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
 </body>
