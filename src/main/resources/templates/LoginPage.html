@@ -92,52 +92,52 @@
             </div>
         </div>
     </form>
-    <script>
-        var endpoint = '/verifyLogin/';
-            var data = {
-                params:
-                {
-                    enrollno: enrollno,
-                    password: password
+<!--    <script>-->
+<!--        var endpoint = '/verifyLogin/';-->
+<!--            var data = {-->
+<!--                params:-->
+<!--                {-->
+<!--                    enrollno: enrollno,-->
+<!--                    password: password-->
 
-                }
-            }
+<!--                }-->
+<!--            }-->
 
-            axios.post(endpoint, null, data)
-                .then(function(response) {
+<!--            axios.post(endpoint, null, data)-->
+<!--                .then(function(response) {-->
 
-                    if(response.data==0)
-                    {
-                           Swal.fire({
-                              icon: 'warning',
-                              title: 'Already marked',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-                    }
-                    else
-                    {
-                          Swal.fire({
-                              icon: 'success',
-                              title: 'Attendance Mark Successfully',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
-                    }
+<!--                    if(response.data==0)-->
+<!--                    {-->
+<!--                           Swal.fire({-->
+<!--                              icon: 'warning',-->
+<!--                              title: 'Already marked',-->
+<!--                              showConfirmButton: false,-->
+<!--                              timer: 3000-->
+<!--                        });-->
+<!--                    }-->
+<!--                    else-->
+<!--                    {-->
+<!--                          Swal.fire({-->
+<!--                              icon: 'success',-->
+<!--                              title: 'Attendance Mark Successfully',-->
+<!--                              showConfirmButton: false,-->
+<!--                              timer: 3000-->
+<!--                        });-->
+<!--                    }-->
 
-                })
-                .catch(function(error) {
-                var warning = new Audio('/assets/sound/beep-warning.wav');
-                    console.log(error);
-                    warning.play();
-                    Swal.fire({
-                              icon: 'error',
-                              title: 'something went wrong',
-                              showConfirmButton: false,
-                              timer: 3000
-                        });
+<!--                })-->
+<!--                .catch(function(error) {-->
+<!--                var warning = new Audio('/assets/sound/beep-warning.wav');-->
+<!--                    console.log(error);-->
+<!--                    warning.play();-->
+<!--                    Swal.fire({-->
+<!--                              icon: 'error',-->
+<!--                              title: 'something went wrong',-->
+<!--                              showConfirmButton: false,-->
+<!--                              timer: 3000-->
+<!--                        });-->
 
-    </script>
+<!--    </script>-->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
     <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
@@ -165,5 +165,4 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
-
 </html>

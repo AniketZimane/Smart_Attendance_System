@@ -4,6 +4,8 @@ import com.example.Smart_Attendance_System.Dao.ConfigRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -21,26 +23,26 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-
 public class MySecurityConfig
 {
     @Autowired
     ConfigRepo configRepo;
+
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/assets/**","/login").permitAll()
+                .requestMatchers("/assets/**","/login","/student/**","/teacher/**").permitAll()
                 .requestMatchers("/admindashboard/**", "/student/**").hasRole("ADMIN")
                 .requestMatchers("/","").hasRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
+                .loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
 //                    .loginProcessingUrl("/admindashboard/")
                 .defaultSuccessUrl("/admindashboard/", true)
                 .and()
@@ -54,7 +56,7 @@ public class MySecurityConfig
     }
 
     @Bean
-    protected UserDetailsService userDetailsService() {
+    protected UserDetailsService adminDetailsService() {
         List<UserDetails> listUser = new ArrayList<>();
         listUser.add(
                 User.builder()
@@ -73,4 +75,5 @@ public class MySecurityConfig
     public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
+
 }

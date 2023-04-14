@@ -63,47 +63,41 @@
 </head>
 
 <body style="margin-top: 0px;padding: 0px;">
-<!--    <nav class="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button" style="background: rgb(34, 34, 34);border-radius: 20;border-top-left-radius: 20;border-top-right-radius: 20;border-bottom-right-radius: 20;border-bottom-left-radius: 20;border-style: none;padding-top: 0;padding-bottom: 10px;">-->
-<!--        <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>-->
-<!--            <div><a class="navbar-brand" href="#"><span>Creativarian </span> </a></div>-->
-<!--            <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">-->
-<!--                <ul class="navbar-nav nav-right">-->
-<!--                    <li class="nav-item"><a class="nav-link active" href="studentdashboard.html" style="color: rgba(224,217,217,0.9);">home </a></li>-->
-<!--                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="color: rgba(224,217,217,0.9);">Services </a>-->
-<!--                        <div class="dropdown-menu"><a class="dropdown-item" href="services.html">Price Packages</a><a class="dropdown-item" href="#">Order Services</a><a class="dropdown-item" href="#">Custom Request</a></div>-->
-<!--                    </li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="about.html" style="color: rgba(224,217,217,0.9);">about </a></li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="faq.html" style="color: rgba(224,217,217,0.9);">faq </a></li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="contact.html" style="color: rgba(224,217,217,0.9);">contact </a></li>-->
-<!--                </ul>-->
-<!--                <p class="ms-auto navbar-text actions" style="text-align: right;"><a class="login" href="Login.html" style="color: rgba(224,217,217,0.9);">Log In</a> <a class="btn btn-light action-button" role="button" href="signup.html" style="color: rgba(0,0,0,0.9);background: var(&#45;&#45;bs-gray-200);border-radius: 10px;border-style: solid;border-color: rgba(0,0,0,0.9);font-size: 16px;padding: 5px 8px;">Sign Up</a></p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </nav>-->
-    <div class="border rounded d-lg-flex justify-content-lg-center">
+    <div class="border rounded d-lg-flex justify-content-lg-center" style="margin-top: 100px;">
         <div class="container full-height">
-            <div class="row flex center v-center full-height">
+            <div class="row flex center v-center full-height" style="margin-top: 0px;">
                 <div class="col-8 col-sm-4">
                     <div class="border rounded form-box">
-                            <fieldset>
+                        <form method="post" action="/student/validate/">
+                            <div class="d-flex flex-column justify-content-center" id="login-box">
+                                <div class="login-box-header">
+                                    <h4 style="color: var(--bs-black);margin-bottom: 0px;font-weight: bold;font-size: 30px;font-family: Adamina, serif;background: var(--white-color);">Login Page</h4>
+                                </div>
 
-                                <legend>Login</legend><img id="avatar" class="avatar round" src="/assets/img/avatar.png">
-                                <input class="form-control" type="number" id="userid" name="id"  placeholder="Username">
-                                <script>
-                                    var userid=$(#id);
-                                </script>
+                                <div th:if="${msg}" class="alert alert-danger" th:text="${msg}">
+                                </div>
 
-                                <a class="btn btn-primary d-block w-100" role="button"  th:href="@{/example/{id}(id=${userid})}">LOGIN </a>
-                            </fieldset>
+                                <div class="d-flex flex-row align-items-center login-box-seperator-container">
+                                    <div class="login-box-seperator"></div>
+                                    <div class="login-box-seperator-text"></div>
+                                    <div class="login-box-seperator"></div>
+                                </div>
+                                <div class="email-login" style="background-color: #ffffff;"><input class="form-control email-imput form-control" type="text" style="margin-top: 10px;" required="" placeholder="Username" minlength="10" name="enrollno"><input class="form-control password-input form-control" type="password" style="margin-top: 10px;" required="" placeholder="Password" minlength="6" name="password"></div>
+                                <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;"><button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember_me" style="cursor: pointer;" name="remember_me"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div><a id="forgot-password-link" href="#">Forgot Password?</a>
+                                    </div>
+                                </div>
+                                <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
+                                    <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#">Sign Up!</a></p>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<script>
-    var en=$(#enrollno);
-    console.log(en);
-</script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
     <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>

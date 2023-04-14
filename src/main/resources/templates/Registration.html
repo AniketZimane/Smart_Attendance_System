@@ -68,36 +68,36 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Last Name*</label><input class="form-control" type="text" placeholder="Last Name" name="lastname" th:value="${stud?.lastname}" required=""></div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Father Name*</label><input class="form-control" type="text" placeholder="Last Name" name="fathername" th:value="${stud?.fathername}" required=""></div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mother Name*</label><input class="form-control" type="text" placeholder="Last Name" name="mothername" th:value="${stud?.mothername}" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enroll Year*</label><input class="form-control" type="date" name="enrollyear" required=""></div>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Enroll Year*</label><input class="form-control" type="date" name="enrollyear" th:value="${stud?.enrollyear}" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Birth Date*</label><input class="form-control" type="date" name="dob" th:value="${stud?.dob}" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Gender*</label><select class="form-select" name="gender" required="">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
                         </select></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Age*</label><input class="form-control" type="text" placeholder="Age" name="age" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Email Id*</label><input class="form-control" type="text" placeholder="Email-id" inputmode="email" name="emailid" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Nationality*</label><input class="form-control" type="text" name="country" placeholder="Country" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Aadhar No*</label><input class="form-control" type="text" placeholder="Aadhar Number" name="aadharno" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile No*</label><input class="form-control" type="text" placeholder="Mobile No" name="mobileno" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Collage/University Name*</label><input class="form-control" type="text" name="collagename" placeholder="Collage/University Name" inputmode="numeric" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Department*</label><select class="form-select" name="deptname" required="">
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Age*</label><input class="form-control" type="text" placeholder="Age" name="age" th:value="${stud?.age}" required=""></div>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Email Id*</label><input class="form-control" type="text" placeholder="Email-id" inputmode="email" name="emailid" th:value="${stud?.emailid}" required=""></div>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Nationality*</label><input class="form-control" type="text" name="country" placeholder="Country" th:value="${stud?.Country}" required=""></div>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Aadhar No*</label><input class="form-control" type="text" placeholder="Aadhar Number" name="aadharno" th:value="${stud?.aadharno}" required=""></div>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile No*</label><input class="form-control" type="text" placeholder="Mobile No" name="mobileno" th:value="${stud?.mobileno}" required=""></div>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Collage/University Name*</label><input class="form-control" type="text" name="collagename" placeholder="Collage/University Name" inputmode="numeric" th:value="${stud?.collagename}" required=""></div>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Department*</label><select class="form-select" name="deptname"  required="">
                             <option value="Computer Engineering" th:selected="${stud?.deptname == 'Computer Engineering'}">Computer Engineering</option>
                             <option value="Electrical Engineering" th:selected="${stud?.deptname == 'Electrical Engineering'}">Electrical Engineering</option>
                             <option value="Electronic and TelecommunicationEngineering" th:selected="${stud?.deptname == 'Electronic and TelecommunicationEngineering'}">Electronic and TelecommunicationEngineering</option>
                         </select></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Semester*</label><select class="form-select" name="sem" required="">
-                            <option value="1" selected="">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
+                            <option value="1" th:selected="${stud?.sem == '1'}">1</option>
+                            <option value="2" th:selected="${stud?.sem == '2'}">2</option>
+                            <option value="3" th:selected="${stud?.sem == '3'}">3</option>
+                            <option value="4" th:selected="${stud?.sem == '4'}">4</option>
+                            <option value="5" th:selected="${stud?.sem == '5'}">5</option>
+                            <option value="6" th:selected="${stud?.sem == '6'}">6</option>
                         </select></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Password*</label><input class="form-control" type="text" name="password" placeholder="Password" inputmode="numeric" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Confirm Password*</label><input class="form-control" type="text" name="password2" placeholder="Password" inputmode="numeric" required=""></div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Upload Profile Picture</label><input class="form-control" type="file" name="file" required="" accept="image/png"></div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Address</label><textarea class="form-control" placeholder="Address" name="address" required=""></textarea>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Address</label><textarea class="form-control"  placeholder="Address" name="address" th:value="${stud?.address}" required=""></textarea>
                         <hr class="my-4">
                     </div>
                 </div>

@@ -10,8 +10,7 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface AttendanceRepo extends JpaRepository<Attendance,Integer> {
-//    @Query("select * from Attendance where enrollno=:enrollno and subId=:subId and teacherId=:teacherId")
-//    public List<Attendance> checkAttendance(Long enrollno,Integer subId,Long teacherId);
+    List<Attendance> findByEnrollno(Long enrollno);
 
     public List<Attendance> findByenrollnoAndSubIdAndTeacherIdAndStartTimeAndEndTime(Long enrollno, Integer subId, Long teacherId, LocalDateTime startTime, LocalDateTime endTime);
 }
