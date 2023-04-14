@@ -85,7 +85,6 @@ public class StudentController {
     @GetMapping("/login")
     public String login()
     {
-
         return "LoginPage";
     }
     @GetMapping("/register/")
@@ -136,19 +135,11 @@ public class StudentController {
 
         String from = "ad.developer@gmail.com";
         String to = stuNew.getEmailid();
-//        SimpleMailMessage message=new SimpleMailMessage();
-//        message.setFrom(from);
-//        message.setTo(to);
-//        String maiSubject="To verifying attendence";
-//        String mailContent="";
-//        message.setSubject(maiSubject);
-//        message.setText(mailContent);
-//        mailSender.send(message);
         MimeMessage message=mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         String maiSubject="To verifying attendence";
-        String mailContent="<h1>Welcome to Smart Innovative THings</h1><br><p>Your Registration Completed successfully</p>";
-        mailContent+= "<a href='https://localhost:8080'><a/>";
+        String mailContent="<h1>Welcome to Innovative THings</h1><br><p>Your Registration Completed successfully</p>";
+        mailContent+= "<a href='https://localhost:8080/UserDashBoard/'><a/>";
         helper.setFrom(from,"Innovative Things");
         helper.setTo(to);
         helper.setSubject(maiSubject);
@@ -292,6 +283,20 @@ public class StudentController {
         System.out.println(attendedList);
         model.addAttribute("attendedList",attendedList);
         return "AttendanceTable";
+    }
+
+    @GetMapping("/edit/{id}/")
+    public String editObject(@PathVariable("id") Long id, Model model) {
+        Student stud = studentRepo.getReferenceById(id);
+        if(stud==null)
+        {
+            model.addAttribute("msg", "Incorrect Username");
+
+        }
+        else{
+            model.addAttribute("stud", stud);
+        }
+        return "GenerateId";
     }
 
 

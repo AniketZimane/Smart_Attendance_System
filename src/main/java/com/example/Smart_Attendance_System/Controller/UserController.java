@@ -20,32 +20,17 @@ public class UserController {
     {
         return "index";
     }
-    @GetMapping("/UserLoginPage/")
-    public String dashBoard()
-    {
-        return "UserEntryPage";
-    }
 
-
-//    @GetMapping("/getMyid")
-//    public String findByEnrollno(Model model, @RequestParam("enrollno") Long enrollno) {
-//        Student stud = studentRepo.getReferenceById(enrollno);
-//    //        System.out.print(stud.toString());
-//        model.addAttribute("stud", stud);
-//
-//        return "GenerateId";
+//    @GetMapping("/UserLoginPage/")
+//    public String dashBoard()
+//    {
+//        return "UserEntryPage";
 //    }
-            @GetMapping("/edit/{id}/")
-            public String editObject(@PathVariable("id") Long id, Model model) {
-                Student stud = studentRepo.getReferenceById(id);
-                if(stud==null)
-                {
-                    model.addAttribute("msg", "Incorrect Username");
 
-                }
-                else{
-                    model.addAttribute("stud", stud);
-                }
-                return "GenerateId";
-            }
+    @GetMapping("/Userlogin")
+    public String login()
+    {
+
+        return "UserLogin";
+    }
 }
