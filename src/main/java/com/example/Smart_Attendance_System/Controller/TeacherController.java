@@ -36,6 +36,8 @@ public class TeacherController {
     DeparmentRepo deparmentRepo;
     @Autowired
     AttendanceRepo attendanceRepo;
+    @Autowired
+    LecturesRepo lecturesRepo;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -55,6 +57,8 @@ public class TeacherController {
     {
         courseRepo.save(cos);
         List<Course> courseList=courseRepo.findAll();
+        List<Department> departmentList=deparmentRepo.findAll();
+        model.addAttribute("departmentList",departmentList);
         model.addAttribute("courseList",courseList);
         model.addAttribute("msg","Course Registration successful");
         return "coursereg";
@@ -112,6 +116,8 @@ public class TeacherController {
     {
         List<Course> courseList=courseRepo.findAll();
         model.addAttribute("courseList",courseList);
+        List<Department> departmentList=deparmentRepo.findAll();
+        model.addAttribute("departmentList",departmentList);
         return "coursereg";
     }
     @GetMapping("/subjectRegistration/")
@@ -257,6 +263,54 @@ public class TeacherController {
     {
         return "PasskeyValidation";
     }
+    @GetMapping("/teacher/login/")
+    public String teacherLogin(Model model)
+    {
+        return "teacherlogin";
+    }
+    @PostMapping("/teacher/validate/")
+    public String teacherValidate(Model model,Integer id,String password)
+    {
+        Teacher tech = null;
+        String originalpassword=null;
+        try{
+            tech=teacherRepo.getReferenceById(id);
+            originalpassword=tech.getPassword();
+
+        }
+        catch (Exception e){
+            System.out.println("Login failed");
+            model.addAttribute("msg","No user found");
+            return "teacherlogin";
+        }
+        if (password.equals(originalpassword))
+        {
+            List<Department> departmentList=deparmentRepo.findAll();
+            List<Teacher> teacherList=teacherRepo.findAll();
+            System.out.println(departmentList);
+            List<Course> courseList=courseRepo.findAll();
+            List<Subject> subjectList=subjectRepo.findAll();
+            List<Lectures> lecturesList=lecturesRepo.findAll();
+            System.out.println(lecturesList);
+            model.addAttribute("departmentList",lecturesList);
+            model.addAttribute("teacherList",teacherList);
+
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("subjectList",subjectList);
+
+            model.addAttribute("tech",tech);
+            model.addAttribute("msg","Login successfull");
+            System.out.println("Login successfull");
+            return "lectureEntry";
+        }
+        else {
+            model.addAttribute("msg","Invalid password");
+            return "teacherlogin";
+        }
+
+    }
+
 
 
 }

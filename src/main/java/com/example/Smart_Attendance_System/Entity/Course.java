@@ -10,23 +10,14 @@ public class Course {
     Integer courseId;
     @Column(unique = true)
     String name;
-
+    Integer departmentId;
     public Course() {
     }
 
-    public Course(Integer courseId, String name) {
+    public Course(Integer courseId, String name, Integer departmentId) {
         this.courseId = courseId;
         this.name = name;
-    }
-
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.departmentId = departmentId;
     }
 
     public Integer getCourseId() {
@@ -37,11 +28,28 @@ public class Course {
         this.courseId = courseId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
                 "courseId=" + courseId +
                 ", name='" + name + '\'' +
+                ", departmentId=" + departmentId +
                 '}';
     }
 }

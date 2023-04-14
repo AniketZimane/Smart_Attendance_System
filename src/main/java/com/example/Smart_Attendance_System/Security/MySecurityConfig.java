@@ -33,7 +33,7 @@ public class MySecurityConfig
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/assets/**","/login","/student/**","/teacher/**").permitAll()
+                .requestMatchers("/assets/**","/login","/student/**","/teacher/**","/passkey/","/scancard/","/mark/").permitAll()
                 .requestMatchers("/admindashboard/**", "/student/**").hasRole("ADMIN")
                 .requestMatchers("/","").hasRole("USER")
                 .anyRequest()
@@ -65,11 +65,8 @@ public class MySecurityConfig
                         .roles("ADMIN")
                         .build()
         );
-
-
         return new InMemoryUserDetailsManager(listUser);
     }
-
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
