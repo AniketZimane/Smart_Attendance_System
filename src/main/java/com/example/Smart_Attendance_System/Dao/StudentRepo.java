@@ -16,4 +16,7 @@ public interface StudentRepo extends JpaRepository<Student,Long> {
 
     List<Student> findByCourseId(Integer courseId);
 
+    @Query("select name from Subject where id = :id")
+    String findNameBySubjectId(Integer id);
+
 }

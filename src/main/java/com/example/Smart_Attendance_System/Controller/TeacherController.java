@@ -359,7 +359,7 @@ public class TeacherController {
     {
         List<Course> courseList=courseRepo.findAll();
         model.addAttribute("courseList",courseList);
-        return "attendanceSummaryreport";
+        return "attendancereportentry";
     }
     @PostMapping("/attendancereport2/")
     public String summeryReport(Model model,Integer courseId,Integer month,Integer year)
@@ -386,10 +386,49 @@ public class TeacherController {
         int totalPresenty= attendanceRepo.getTotalPresenty(enrollno,courseId,month,year);
         int totallectures=lecturesRepo.getTotalLecturesByCourse(courseId);
         int atpersent=(totalPresenty/totallectures)*100;
+        if(atpersent<75)
+        {
+            model.addAttribute("stutus","Not Eligible");
+        }
+        else{
+            model.addAttribute("stutus","Eligible");
+        }
         System.out.println(atpersent);
         model.addAttribute("atpersent",atpersent);
         model.addAttribute("subjectList",subjectList);
         return"attendanceSummaryreport";
+    }
+
+    @GetMapping("/generateattendencereportforteacher/")
+    public String atRecord2(Model model)
+    {
+        List<Attendance> attendedList=attendanceRepo.findAll();
+        System.out.println(attendedList);
+        model.addAttribute("attendedList",attendedList);
+        model.addAttribute("subjectRepo",subjectRepo);
+        return "teachersideattendance";
+    }
+
+    @GetMapping("/attendencemarkdetails/delete/{id}/")
+    public String deleteatrecord(Model model, @PathVariable Integer id)
+    {
+        attendanceRepo.deleteById(id);
+        List<Attendance> attendedList=attendanceRepo.findAll();
+        System.out.println(attendedList);
+        model.addAttribute("attendedList",attendedList);
+        model.addAttribute("subjectRepo",subjectRepo);
+        return "teachersideattendance";
+    }
+
+    @GetMapping("/GenerateAttendenceReport/delete/{id}/")
+    public String deleteatrecordofadmin(Model model, @PathVariable Integer id)
+    {
+        attendanceRepo.deleteById(id);
+        List<Attendance> attendedList=attendanceRepo.findAll();
+        System.out.println(attendedList);
+        model.addAttribute("attendedList",attendedList);
+        model.addAttribute("subjectRepo",subjectRepo);
+        return "AttendanceTable";
     }
 
 }

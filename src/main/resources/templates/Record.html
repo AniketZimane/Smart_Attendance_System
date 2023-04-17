@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>StudentDBM</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Adamina&amp;display=swap">
@@ -78,7 +79,7 @@
             <div class="col-12 col-sm-6 col-md-6">
 <!--                <h3 class="text-dark mb-4" style="font-family: 'Archivo Black', sans-serif;">Smart Attendance Management System</h3>-->
             </div>
-            <div class="col-12 col-sm-6 col-md-6 text-end" style="margin-bottom: 30px;"><a class="btn btn-primary" role="button">Download&nbsp;<i class="fa fa-download"></i></a></div>
+            <div class="col-12 col-sm-6 col-md-6 text-end" style="margin-bottom: 30px;"><button class="btn btn-primary" role="button" onclick="saveTableAsPDF()">Download&nbsp;<i class="fa fa-download"></i></button></div>
         </div>
         <div class="card" id="TableSorterCard">
             <div class="card-header py-3">
@@ -145,6 +146,18 @@
             </div>
         </div>
     </div>
+<script>
+function saveTableAsPDF() {
+  const table = document.getElementById("tbl");
+  html2canvas(table).then(function(canvas) {
+    const imgData = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.download = "table.png";
+    link.href = imgData;
+    link.click();
+  });
+}
+    </script>
 <div class="d-lg-flex justify-content-lg-center" style="margin-top: 20px;">
     <nav>
         <ul class="pagination">

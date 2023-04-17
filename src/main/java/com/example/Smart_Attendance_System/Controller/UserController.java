@@ -127,6 +127,12 @@ public class UserController {
         model.addAttribute("attendedList", attendedList);
         return "attendancesummeryofstudentside";
     }
-
+    @GetMapping("/record/{enrollno}/")
+    public String getStudentAttendance(Model model,@PathVariable Long enrollno)
+    {
+        List<Attendance> attendanceList=attendanceRepo.findByEnrollno(enrollno);
+        model.addAttribute("attendanceList",attendanceList);
+        return "StudentAttendancetable";
+    }
 
 }
