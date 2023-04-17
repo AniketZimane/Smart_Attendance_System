@@ -13,15 +13,18 @@ public class Teacher {
     @Column(unique = true)
     String username;
     String password;
-
+    String course;
+    String subject;
     public Teacher() {
     }
 
-    public Teacher(String name, String department, String username, String password) {
+    public Teacher(String name, String department, String username, String password, String course, String subject) {
         this.name = name;
         this.department = department;
         this.username = username;
         this.password = password;
+        this.course = course;
+        this.subject = subject;
     }
 
     public Integer getId() {
@@ -64,6 +67,22 @@ public class Teacher {
         this.password = password;
     }
 
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
@@ -72,6 +91,8 @@ public class Teacher {
                 ", department='" + department + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", course='" + course + '\'' +
+                ", subject='" + subject + '\'' +
                 '}';
     }
 }

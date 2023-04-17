@@ -79,6 +79,15 @@
                         <div class="btn-group" role="group"><button class="btn btn-primary" type="button" style="margin-left: 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-search">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
                                 </svg></button></div>
+                        <form>
+                            <label class="form-label mb-0" for="float-input">Select the Filter</label>
+                            <div class="field"><select class="form-select" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                <option value="http://localhost:8080/record/enrollno/" th:selected="${colName == 'enrollno'}">Enrollment No</option>
+                                <option value="http://localhost:8080/record/teacherId/" th:selected="${colName == 'teacherId'}">Teacher ID</option>
+                                <option value="http://localhost:8080/record/subId/" th:selected="${colName == 'subId'}">Subject Id</option>
+                                <option value="http://localhost:8080/record/startTime/" th:selected="${colName == 'startTime'}">Start Time</option>
+                            </select></div>
+                        </form>
                     </div>
 <!--                    <div class="col-12 col-sm-7 col-md-6 text-end" style="margin: 0px;padding: 5px 15px;"><button class="btn btn-primary btn-sm reset" type="button" style="margin: 2px;">Borrar Filtros</button><button class="btn btn-warning btn-sm" id="zoom_in" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-plus"></i></button><button class="btn btn-warning btn-sm" id="zoom_out" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-minus"></i></button></div>-->
                 </div>

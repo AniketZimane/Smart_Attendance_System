@@ -86,13 +86,8 @@
                             <option value="Electrical Engineering" th:selected="${stud?.deptname == 'Electrical Engineering'}">Electrical Engineering</option>
                             <option value="Electronic and TelecommunicationEngineering" th:selected="${stud?.deptname == 'Electronic and TelecommunicationEngineering'}">Electronic and TelecommunicationEngineering</option>
                         </select></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Semester*</label><select class="form-select" name="sem" required="">
-                            <option value="1" th:selected="${stud?.sem == '1'}">1</option>
-                            <option value="2" th:selected="${stud?.sem == '2'}">2</option>
-                            <option value="3" th:selected="${stud?.sem == '3'}">3</option>
-                            <option value="4" th:selected="${stud?.sem == '4'}">4</option>
-                            <option value="5" th:selected="${stud?.sem == '5'}">5</option>
-                            <option value="6" th:selected="${stud?.sem == '6'}">6</option>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Course*</label><select class="form-select" name="courseId" required="">
+                            <option th:each="course :${courseList}" th:text="${course.name}" th:value="${course.id}" th:selected="${stud?.courseId == '1'}">1</option>
                         </select></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Password*</label><input class="form-control" type="text" name="password" placeholder="Password" inputmode="numeric" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Confirm Password*</label><input class="form-control" type="text" name="password2" placeholder="Password" inputmode="numeric" required=""></div>

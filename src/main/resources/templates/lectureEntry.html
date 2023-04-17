@@ -16,14 +16,24 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900">
+    <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
+    <link rel="stylesheet" href="/assets/css/Black-Navbar.css">
+    <link rel="stylesheet" href="/assets/css/Card-Store.css">
     <link rel="stylesheet" href="/assets/css/Collapsible-Sidebar.css">
+    <link rel="stylesheet" href="/assets/css/Dark-Mode-Switch.css">
+    <link rel="stylesheet" href="/assets/css/FORM.css">
     <link rel="stylesheet" href="/assets/css/Gamanet_Sidebar_bs5.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" href="/assets/css/Login-Box-En-login-box-en.css">
+    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient-Blue-gradient-login-form.css">
+    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient.css">
     <link rel="stylesheet" href="/assets/css/login-form-styles.css">
     <link rel="stylesheet" href="/assets/css/login-form.css">
     <link rel="stylesheet" href="/assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
@@ -31,8 +41,13 @@
     <link rel="stylesheet" href="/assets/css/Ludens---Dark-Mode-Admin-Dashboard.css">
     <link rel="stylesheet" href="/assets/css/Modern-Contact-Form.css">
     <link rel="stylesheet" href="/assets/css/Multi-step-form.css">
+    <link rel="stylesheet" href="/assets/css/MUSA_form-wizard-form-wizard.css">
+    <link rel="stylesheet" href="/assets/css/MUSA_form-wizard.css">
     <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form-styles.css">
+    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form.css">
     <link rel="stylesheet" href="/assets/css/Pretty-Login-Form-.css">
+    <link rel="stylesheet" href="/assets/css/Responsive-Active-Navbar.css">
     <link rel="stylesheet" href="/assets/css/select.css">
     <link rel="stylesheet" href="/assets/css/side-menu.css">
     <link rel="stylesheet" href="/assets/css/sidebar-1-style4.css">
@@ -47,14 +62,15 @@
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
 </head>
 
-<body>
-    <div class="row login-form">
+<body style="padding-left: 0px;margin-top: 0px;">
+<div th:replace="teacherDashboard.html :: teacherfragment"></div>
+    <div class="row login-form" style="background: var(--white-color);">
         <div class="col-md-4 offset-md-4">
             <h2 class="text-center form-heading" style="font-family: Aladin, serif;font-size: 40px;color: var(--bs-black);">Lecture Entry</h2>
             <form class="custom-form" method="post" action="/mark/">
-<!--                <div class="form-group mb-3">-->
-<!--                    <input class="form-control" type="number" placeholder="Teacher Id" name="idTeacher">-->
-<!--                </div>-->
+                <!--                <div class="form-group mb-3">-->
+                <!--                    <input class="form-control" type="number" placeholder="Teacher Id" name="idTeacher">-->
+                <!--                </div>-->
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Teacher Id</label>
                     <select class="form-select" name="idTeacher" required="">
                         <option th:each="tech : ${tech}"
@@ -63,20 +79,20 @@
                     </select></div>
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Department</label>
                     <select class="form-select" name="idDept" required="">
-                        <option th:each="dept : ${tech}"
+                        <option th:each="tech : ${tech}"
                                 th:value="${tech.department}" th:text="${tech.department}" selected="">
                         </option>
                     </select></div>
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Class</label>
                     <select class="form-select" name="idCourse" required="">
-                        <option th:each="course : ${courseList}"
-                                th:value="${course.courseId}" th:text="${course.name}" selected="">
+                        <option th:each="tech : ${tech}"
+                                th:value="${tech.course}" th:text="${tech.course}" selected="">
                         </option>
                     </select></div>
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Subject</label>
                     <select class="form-select" name="idSub" required="">
-                        <option th:each="sub : ${subjectList}"
-                                th:value="${sub.id}" th:text="${sub.name}" selected="">
+                        <option th:each="tech : ${tech}"
+                                th:value="${tech.subject}" th:text="${tech.subject}" selected="">
                         </option>
                     </select></div>
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Start DateTime</label><input class="form-control" id="startTime" type="datetime-local" placeholder="Start Time" name="startTime" required=""></div>
@@ -87,8 +103,10 @@
     </div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
     <script src="/assets/js/Billing-Table-with-Add-Row--Fixed-Header-Feature-Billing-Table-with-Add-Row--Fixed-Header.js"></script>
     <script src="/assets/js/Collapsible-Sidebar-Sidebar.js"></script>
+    <script src="/assets/js/Dark-Mode-Switch-darkmode.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
@@ -103,6 +121,8 @@
     <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-modalDelete.js"></script>
     <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-theme.js"></script>
     <script src="/assets/js/Multi-step-form-script.js"></script>
+    <script src="/assets/js/MUSA_form-wizard-form-wizard.js"></script>
+    <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
 </body>

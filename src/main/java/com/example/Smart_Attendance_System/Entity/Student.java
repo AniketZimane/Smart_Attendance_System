@@ -23,7 +23,7 @@ public class Student {
     String mobileno;
     String deptname;
     String collagename;
-    String sem;
+    Integer courseId;
     String address;
     String status;
     String password;
@@ -57,7 +57,7 @@ public class Student {
         this.extension = extension;
     }
 
-    public Student(long enrollno, String usertype, String firstname, String lastname, String fathername, String mothername, String enrollyear, String dob, String gender, Integer age, String emailid, String country, String aadharno, String mobileno, String deptname, String collagename, String sem, String address, String status, String extension,String password) {
+    public Student(long enrollno, String usertype, String firstname, String lastname, String fathername, String mothername, String enrollyear, String dob, String gender, Integer age, String emailid, String country, String aadharno, String mobileno, String deptname, String collagename, Integer courseId, String address, String status, String extension,String password) {
         this.enrollno = enrollno;
         this.usertype = usertype;
         this.firstname = firstname;
@@ -74,7 +74,7 @@ public class Student {
         this.mobileno = mobileno;
         this.deptname = deptname;
         this.collagename = collagename;
-        this.sem = sem;
+        this.courseId = courseId;
         this.address = address;
         this.status=status;
         this.extension=extension;
@@ -209,12 +209,12 @@ public class Student {
         this.collagename = collagename;
     }
 
-    public String getSem() {
-        return sem;
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setSem(String sem) {
-        this.sem = sem;
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     public String getAddress() {
@@ -245,7 +245,7 @@ public class Student {
                 ", password='" + password + '\'' +
                 ", deptname='" + deptname + '\'' +
                 ", collagename='" + collagename + '\'' +
-                ", sem='" + sem + '\'' +
+                ", courseId='" + courseId + '\'' +
                 ", address='" + address + '\'' +
                 ", status='" + status + '\'' +
                 ", extension='" + extension + '\'' +

@@ -6,6 +6,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -224,26 +226,26 @@ public class TeacherController {
 
 
 
-    @GetMapping("/sendEmail/")
-    public void sendEmail(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
-        List<Attendance> at=attendanceRepo.findAll();
-        String from = "ad.developer@gmail.com";
-        String to = "aniketzimane@gmail.com";
-        MimeMessage message=mailSender.createMimeMessage();
-        MimeMessageHelper helper=new MimeMessageHelper(message,"utf-8");
-//        SimpleMailMessage message=new SimpleMailMessage();
-
-
-        String maiSubject="To verifying attendence";
-        String mailContent="<h1>You have successfully marked your attendence please verify your attendence</h1><br>";
-               mailContent+= "<a href='https://localhost:8080'><a/>";
-        helper.setFrom(from,"Innovative Things");
-        helper.setTo(to);
-        helper.setSubject(maiSubject);
-        helper.setText(mailContent,true);
-        mailSender.send(message);
-
-    }
+//    @GetMapping("/sendEmail/")
+//    public void sendEmail(HttpServletRequest request, String email, Integer subId, LocalDateTime startTime, LocalDateTime endTime) throws MessagingException, UnsupportedEncodingException {
+//        List<Attendance> at=attendanceRepo.findByEmailAndSubIdAndStartTimeAndEndTime(email,subId,startTime,endTime);
+//        String from = "ad.developer@gmail.com";
+//        String to = at.toString();
+//        MimeMessage message=mailSender.createMimeMessage();
+//        MimeMessageHelper helper=new MimeMessageHelper(message,"utf-8");
+////        SimpleMailMessage message=new SimpleMailMessage();
+//
+//
+//        String maiSubject="To verifying attendence";
+//        String mailContent="<h1>You have successfully marked your attendence please verify your attendence</h1><br><p>Use following link to review your attendence and view your id card</p><br>";
+//               mailContent+= "<a href='https://localhost:8080/student/login'><a/>";
+//        helper.setFrom(from,"Innovative Things");
+//        helper.setTo(to);
+//        helper.setSubject(maiSubject);
+//        helper.setText(mailContent,true);
+//        mailSender.send(message);
+//
+//    }
 
     @GetMapping("/passkey/")
     public String passKey(Model model)
@@ -310,7 +312,84 @@ public class TeacherController {
         }
 
     }
+    @GetMapping("/teacher/lecture/entry/{id}/")
+    public String markAttendance(Model model,@PathVariable Integer id)
+    {
+        Teacher tech=teacherRepo.getReferenceById(id);
+        List<Department> departmentList=deparmentRepo.findAll();
+        List<Teacher> teacherdata=teacherRepo.findAll();
+        System.out.println(departmentList);
+        List<Course> courseList=courseRepo.findAll();
+        List<Subject> subjectList=subjectRepo.findAll();
+        List<Lectures> lecturesList=lecturesRepo.findAll();
+        System.out.println(lecturesList);
+        model.addAttribute("departmentList",lecturesList);
+        model.addAttribute("teacherdata",teacherdata);
 
+        model.addAttribute("departmentList",departmentList);
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("subjectList",subjectList);
 
+        model.addAttribute("tech",tech);
+        return "lectureEntry";
+    }
+    @GetMapping("/addmysubject/")
+    public String teacherandsubject(Model model)
+    {
+        List<Department> departmentList=deparmentRepo.findAll();
+        List<Course> courseList=courseRepo.findAll();
+        List<Subject> subList=subjectRepo.findAll();
+        List<Teacher> teacherdata=teacherRepo.findAll();
+        model.addAttribute("teacherdata",teacherdata);
+        model.addAttribute("departmentList",departmentList);
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("subList",subList);
+        return "teacherandsubject";
+    }
+    @PostMapping("/teachersubjectdata/")
+    public String teachersubjectdataregistration(Model model,Teacher tech)
+    {
+        teacherRepo.save(tech);
+        List<Teacher> teacherdata=teacherRepo.findAll();
+        model.addAttribute("teacherdata",teacherdata);
+        return"teacherandsubject";
+    }
+    @GetMapping("/summeryreport/")
+    public String getreport(Model model)
+    {
+        List<Course> courseList=courseRepo.findAll();
+        model.addAttribute("courseList",courseList);
+        return "attendanceSummaryreport";
+    }
+    @PostMapping("/attendancereport2/")
+    public String summeryReport(Model model,Integer courseId,Integer month,Integer year)
+    {
+
+//        int totalPresenty= attendanceRepo.getTotalPresenty(enrollno,courseId,month,year);
+        int totallectures=lecturesRepo.getTotalLecturesByCourse(courseId);
+        List<Student> studentList=studentRepo.findByCourseId(courseId);
+        List<Course> courseList=courseRepo.findAll();
+        model.addAttribute("studentList",studentList);
+        model.addAttribute("attendanceRepo",attendanceRepo);
+        model.addAttribute("courseId",courseId);
+        model.addAttribute("month",month);
+        model.addAttribute("year",year);
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("totallectures",totallectures);
+
+        return "attendanceSummaryreport";
+    }
+    @PostMapping("/generatesummeryreport/")
+    public String generatesummeryreport(Model model,Long enrollno,Integer courseId,Integer month,Integer year)
+    {
+        List<Subject> subjectList=subjectRepo.findAll();
+        int totalPresenty= attendanceRepo.getTotalPresenty(enrollno,courseId,month,year);
+        int totallectures=lecturesRepo.getTotalLecturesByCourse(courseId);
+        int atpersent=(totalPresenty/totallectures)*100;
+        System.out.println(atpersent);
+        model.addAttribute("atpersent",atpersent);
+        model.addAttribute("subjectList",subjectList);
+        return"attendanceSummaryreport";
+    }
 
 }

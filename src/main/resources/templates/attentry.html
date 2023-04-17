@@ -18,9 +18,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900">
     <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
     <link rel="stylesheet" href="/assets/css/Black-Navbar.css">
+    <link rel="stylesheet" href="/assets/css/Card-Store.css">
     <link rel="stylesheet" href="/assets/css/Collapsible-Sidebar.css">
     <link rel="stylesheet" href="/assets/css/Dark-Mode-Switch.css">
     <link rel="stylesheet" href="/assets/css/FORM.css">
@@ -58,86 +60,55 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 
-<body>
-    <form method="post" action="/login">
-        <div class="d-flex flex-column justify-content-center" id="login-box">
-            <div class="login-box-header">
-                <h4 style="color: var(--bs-black);margin-bottom: 0px;font-weight: bold;font-size: 30px;font-family: Adamina, serif;background: var(--white-color);">Login Page</h4>
+<body style="margin-top: 0px;padding-left: 0px;">
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark py-3" style="width: 100%;">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bezier">
+                        <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
+                        <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
+                    </svg></span><span>Brand</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-6"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-6">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
+                </ul>
+                <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Button</button><button class="btn btn-primary" type="button">Button</button></div>
             </div>
-
-            <div th:if="${param.error}" class="alert alert-danger">
-                Invalid username and password.
-            </div>
-            <div th:if="${param.logout}" class="alert alert-success">
-                You have been logged out.
-            </div>
-
-            <div class="d-flex flex-row align-items-center login-box-seperator-container">
-                <div class="login-box-seperator"></div>
-                <div class="login-box-seperator-text"></div>
-                <div class="login-box-seperator"></div>
-            </div>
-            <div class="email-login" style="background-color: #ffffff;"><input class="form-control email-imput form-control" type="text" style="margin-top: 10px;" required="" placeholder="Username" minlength="6" name="username"><input class="form-control password-input form-control" type="password" style="margin-top: 10px;" required="" placeholder="Password" minlength="6" name="password"></div>
-            <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;"><button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
-                <div class="d-flex justify-content-between">
-                    <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember_me" style="cursor: pointer;" name="remember_me"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div><a id="forgot-password-link" href="#">Forgot Password?</a>
-                </div>
-            </div>
-            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
-                <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#">Sign Up!</a></p>
+            <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="#">Button</a><a class="btn btn-primary" role="button" href="#">Button</a></div>
+        </div>
+    </nav>
+    <div>
+        <div class="row login-form" style="background: var(--white-color);">
+            <div class="col-md-4 offset-md-4">
+                <h2 class="text-center form-heading">Attendance Status</h2>
+                <form class="custom-form" method="post" action="/student/displayattendancesummery/">
+                    <div class="form-group mb-3"><input class="form-control" type="text" th:value="${enrollno}" placeholder="Enrollment No" name="enrollno"></div>
+                    <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Enter Year" name="year"></div>
+                    <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Month</label><select class="form-select" name="month">
+                        <option value="0" selected="">Select Month </option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        </select></div>
+                    <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Subject&nbsp;</label><select class="form-select" name="subId">
+                                <option th:each="sub : ${sublist}"
+                                        th:value="${sub.subject}" th:text="${sub.subject}" selected="">
+                                </option>
+                        </select></div><button class="btn btn-light d-block submit-button w-100" type="button" style="background: var(--first-color);">Check</button>
+                </form>
             </div>
         </div>
-    </form>
-<!--    <script>-->
-<!--        var endpoint = '/verifyLogin/';-->
-<!--            var data = {-->
-<!--                params:-->
-<!--                {-->
-<!--                    enrollno: enrollno,-->
-<!--                    password: password-->
-
-<!--                }-->
-<!--            }-->
-
-<!--            axios.post(endpoint, null, data)-->
-<!--                .then(function(response) {-->
-
-<!--                    if(response.data==0)-->
-<!--                    {-->
-<!--                           Swal.fire({-->
-<!--                              icon: 'warning',-->
-<!--                              title: 'Already marked',-->
-<!--                              showConfirmButton: false,-->
-<!--                              timer: 3000-->
-<!--                        });-->
-<!--                    }-->
-<!--                    else-->
-<!--                    {-->
-<!--                          Swal.fire({-->
-<!--                              icon: 'success',-->
-<!--                              title: 'Attendance Mark Successfully',-->
-<!--                              showConfirmButton: false,-->
-<!--                              timer: 3000-->
-<!--                        });-->
-<!--                    }-->
-
-<!--                })-->
-<!--                .catch(function(error) {-->
-<!--                var warning = new Audio('/assets/sound/beep-warning.wav');-->
-<!--                    console.log(error);-->
-<!--                    warning.play();-->
-<!--                    Swal.fire({-->
-<!--                              icon: 'error',-->
-<!--                              title: 'something went wrong',-->
-<!--                              showConfirmButton: false,-->
-<!--                              timer: 3000-->
-<!--                        });-->
-
-<!--    </script>-->
+    </div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
     <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
@@ -162,7 +133,6 @@
     <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </body>
+
 </html>

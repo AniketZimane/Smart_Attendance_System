@@ -14,4 +14,6 @@ public interface StudentRepo extends JpaRepository<Student,Long> {
     @Query("select password from Student where enrollno=:enrollno")
     String gePassword(Long enrollno);
 
+    List<Student> findByCourseId(Integer courseId);
+
 }

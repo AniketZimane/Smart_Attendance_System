@@ -33,7 +33,7 @@ public class MySecurityConfig
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/assets/**","/login","/student/**","/teacher/**","/passkey/","/scancard/","/mark/").permitAll()
+                .requestMatchers("/assets/**","/login","/student/**","/teacher/**","/addmysubject/**","/getattendacereview/","/teachersubjectdata/**","/passkey/","/teacher/lecture/entry/**","/mark/**","/summeryreport/**").permitAll()
                 .requestMatchers("/admindashboard/**", "/student/**").hasRole("ADMIN")
                 .requestMatchers("/","").hasRole("USER")
                 .anyRequest()

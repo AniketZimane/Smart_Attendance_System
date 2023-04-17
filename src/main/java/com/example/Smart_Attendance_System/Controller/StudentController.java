@@ -88,8 +88,10 @@ public class StudentController {
         return "LoginPage";
     }
     @GetMapping("/register/")
-    public String register()
+    public String register(Model model)
     {
+        List<Course> courseList=courseRepo.findAll();
+        model.addAttribute("courseList",courseList);
         return "Registration";
     }
 
@@ -298,7 +300,38 @@ public class StudentController {
         }
         return "GenerateId";
     }
+    @GetMapping("/attendancesummary/")
+    public String summery(Model model)
+    {
+        return "attendanceSummaryreport";
+    }
 
+    @GetMapping("/student/record/{enrollno}/")
+    public String getattendacereview2(Model model,@PathVariable Long enrollno)
+    {
+        List<Subject> sublist=subjectRepo.findAll();
+        model.addAttribute("sublist",sublist);
+
+        int courseId=1;
+        int month=4;
+        int year=2023;
+        int totalPresenty= attendanceRepo.getTotalPresenty(enrollno,courseId,month,year);
+        int totallectures=lecturesRepo.getTotalLecturesByCourse(courseId);
+        System.out.println(totallectures);
+        System.out.println(totalPresenty);
+
+        double atpersent=(totalPresenty/totallectures)*100;
+        System.out.println(atpersent);
+        model.addAttribute("atpersent",atpersent);
+
+        model.addAttribute("enrollno",enrollno);
+        return "attendancesummeryofstudentside";
+    }
+//    @PostMapping("/student/displayattendancesummery/")
+//    public String displayattendancesummery(Model model)
+//    {
+//        return "attendancesummeryofstudentside";
+//    }
 
 
 
