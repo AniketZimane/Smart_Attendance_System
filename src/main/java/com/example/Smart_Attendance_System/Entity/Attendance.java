@@ -2,12 +2,14 @@ package com.example.Smart_Attendance_System.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 public class Attendance {
@@ -18,8 +20,10 @@ public class Attendance {
     @UpdateTimestamp
             @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss:sss")
     LocalDateTime attendanceTime;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    @CreationTimestamp
+    LocalDate attendanceDate;
+    LocalTime startTime;
+    LocalTime endTime;
     Integer subId;
     Long teacherId;
     Long enrollno;
@@ -29,7 +33,7 @@ public class Attendance {
     public Attendance() {
     }
 
-    public Attendance(Integer subId, Long teacherId, Long enrollno, LocalDateTime startTime, LocalDateTime endTime,String email) {
+    public Attendance(Integer subId, Long teacherId, Long enrollno, LocalTime startTime, LocalTime endTime,String email) {
         this.startTime = startTime;
         this.email = email;
         this.endTime = endTime;
@@ -54,7 +58,7 @@ public class Attendance {
         this.attendanceTime = attendanceTime;
     }
 
-    public LocalDateTime getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
@@ -66,15 +70,15 @@ public class Attendance {
         this.enrollno = enrollno;
     }
 
-    public void setStartTime(LocalDateTime stratTime) {
+    public void setStartTime(LocalTime stratTime) {
         this.startTime = stratTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 

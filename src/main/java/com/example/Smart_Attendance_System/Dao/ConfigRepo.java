@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface ConfigRepo extends JpaRepository<ConfigProp,String> {
     @Query("select val from ConfigProp where prop=:prop")
     String getVal(String prop);
+
 }

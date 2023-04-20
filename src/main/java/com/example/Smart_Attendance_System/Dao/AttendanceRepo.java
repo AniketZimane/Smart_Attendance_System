@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @RepositoryRestResource
@@ -15,7 +16,7 @@ public interface AttendanceRepo extends JpaRepository<Attendance,Integer> {
     List<Attendance> findByEnrollno(Long enrollno);
     List<Attendance> getByEnrollnoAndSubId(Long enrollno,Integer subId);
 
-    public List<Attendance> findByenrollnoAndSubIdAndTeacherIdAndStartTimeAndEndTime(Long enrollno, Integer subId, Long teacherId, LocalDateTime startTime, LocalDateTime endTime);
+    public List<Attendance> findByenrollnoAndSubIdAndTeacherIdAndStartTimeAndEndTime(Long enrollno, Integer subId, Long teacherId, LocalTime startTime, LocalTime endTime);
 
     @Query("select count(*) from Attendance where subId in (select id from Subject where courseId=:courseId) and enrollno=:enrollno and month(attendanceTime)=:month and year(attendanceTime)=:year")
     int getTotalPresenty(Long enrollno,Integer courseId,Integer month,Integer year);

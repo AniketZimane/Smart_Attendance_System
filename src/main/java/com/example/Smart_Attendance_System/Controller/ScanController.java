@@ -39,6 +39,8 @@ public class ScanController {
     @PostMapping("/mark/")
     public String markAtt(Model model, Integer idSub, Integer idTeacher, String startTime, String endTime,String email)
     {
+        System.out.println("StartTime "+startTime);
+        System.out.println("EndTime "+endTime);
         List<Lectures> list = lecturesRepo.findByTeacherIdAndSubjectIdAndMonthAndYear(idTeacher,idSub, LocalDate.now().getMonthValue(),LocalDate.now().getYear());
 
         Lectures lec = null;

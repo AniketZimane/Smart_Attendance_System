@@ -118,7 +118,7 @@
                                 <tr th:each="stud : ${studentList}">
                                     <td th:text="${stud.enrollno}">2001170252</td>
                                     <td th:text="${stud.firstname+''+stud.lastname}">Aniket Zimane</td>
-                                    <td th:text="${stud.courseId}">TYCO</td>
+                                    <td th:text="${courseRepo.getNameByCourseId(stud.courseId)}">TYCO</td>
                                     <td th:text="${stud.deptname}">Computer Engineering</td>
                                     <td th:text="${100*(attendanceRepo.getTotalPresenty(stud.enrollno,courseId,month,year))/totallectures}">Computer Engineering</td>
                                     <td th:text="${stutus}">Eligible</td>

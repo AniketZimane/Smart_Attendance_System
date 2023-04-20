@@ -19,4 +19,7 @@ public interface StudentRepo extends JpaRepository<Student,Long> {
     @Query("select name from Subject where id = :id")
     String findNameBySubjectId(Integer id);
 
+    @Query("select count(deptname) from Student where deptname=:deptname")
+    Integer findByDeptname(String deptname);
+
 }

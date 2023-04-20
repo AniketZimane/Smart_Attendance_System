@@ -92,11 +92,11 @@
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Subject</label>
                     <select class="form-select" name="idSub" required="">
                         <option th:each="tech : ${tech}"
-                                th:value="${tech.subject}" th:text="${tech.subject}" selected="">
+                                th:value="${tech.id}" th:text="${tech.subject}" selected="">
                         </option>
                     </select></div>
-                <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Start DateTime</label><input class="form-control" id="startTime" type="datetime-local" placeholder="Start Time" name="startTime" required=""></div>
-                <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">End DateTime</label><input class="form-control" id="endTime" type="datetime-local" placeholder="End Time" name="endTime" required=""></div>
+                <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Start DateTime</label><input class="form-control" id="startTime" type="time" placeholder="Start Time" name="startTime" required=""></div>
+                <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">End DateTime</label><input class="form-control" id="endTime" type="time" placeholder="End Time" name="endTime" required=""></div>
                 <button class="btn btn-light d-block submit-button w-100" type="submit">Submit Form</button>
             </form>
         </div>
@@ -125,6 +125,19 @@
     <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
+<!--<script>-->
+<!--  // Get the current date and time-->
+<!--  var currentDate = new Date();-->
+<!--  // Set the minimum date and time to the current date and time-->
+<!--  var minDate = currentDate.toISOString().slice(0, 16);-->
+
+<!--  // Set the minimum attribute of the datetime field to the current date and time-->
+<!--  document.getElementById("startTime").min=minDate;-->
+<!--&lt;!&ndash;  document.getElementById("startTime").max=minDate;&ndash;&gt;-->
+
+<!--&lt;!&ndash;  document.getElementById("endTime").min=minDate;&ndash;&gt;-->
+<!--&lt;!&ndash;  document.getElementById("endTime").max=minDate;&ndash;&gt;-->
+<!--</script>-->
 </body>
 
 </html>

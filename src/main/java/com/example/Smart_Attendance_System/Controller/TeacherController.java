@@ -371,6 +371,7 @@ public class TeacherController {
         List<Course> courseList=courseRepo.findAll();
         model.addAttribute("studentList",studentList);
         model.addAttribute("attendanceRepo",attendanceRepo);
+        model.addAttribute("courseRepo",courseRepo);
         model.addAttribute("courseId",courseId);
         model.addAttribute("month",month);
         model.addAttribute("year",year);

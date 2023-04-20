@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -60,6 +61,8 @@ public class StudentController {
     @GetMapping("/admindashboard/")
     public String dashboard(Model model)
     {
+        List <Student> studentList=studentRepo.findAll();
+        List <Department> departmentList=deparmentRepo.findAll();
         Long userCount = sturepo.count();
         Long courseCount = courseRepo.count();
         Long teacherCount = teacherRepo.count();
@@ -67,7 +70,14 @@ public class StudentController {
         Long subjectCount = subjectRepo.count();
         List<Integer>teacherid=lecturesRepo.findAll().stream().map(x->x.getTeacherId()).collect(Collectors.toList());
         List<Integer>totallectures=lecturesRepo.findAll().stream().map(x->x.getTotalLectures()).collect(Collectors.toList());
+        List<Integer>subjectId=lecturesRepo.findAll().stream().map(x->x.getSubjectId()).collect(Collectors.toList());
+        List<Lectures> lecturedata=lecturesRepo.findAll();
         model.addAttribute("teacherid", teacherid);
+        model.addAttribute("departmentList", departmentList);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("studentRepo", studentRepo);
+        model.addAttribute("subjectId", subjectId);
+        model.addAttribute("lecturedata", lecturedata);
         model.addAttribute("totallectures", totallectures);
         model.addAttribute("userCount", userCount);
         model.addAttribute("courseCount", courseCount);
@@ -258,11 +268,13 @@ public class StudentController {
     public Integer addEmp(Model model, Long enrollno, Integer subId, Long teacherId, String startTime, String endTime,String email)
     {
         Student stud = studentRepo.getReferenceById(enrollno);
+        System.out.println("StartTime "+ startTime);
+        System.out.println("endtime "+endTime);
         //following line mark attendence if record is present(email)
         email=stud.getEmailid().toString();
         System.out.println(email);
-        LocalDateTime conStartTime = LocalDateTime.parse(startTime, Utils.formatter);
-        LocalDateTime conEndTime = LocalDateTime.parse(endTime, Utils.formatter);
+        LocalTime conStartTime = LocalTime.parse(startTime, Utils.formatter);
+        LocalTime conEndTime = LocalTime.parse(endTime, Utils.formatter);
 
         int responce = 0;
         List<Attendance> list = attendanceRepo.findByenrollnoAndSubIdAndTeacherIdAndStartTimeAndEndTime(enrollno,subId,teacherId,conStartTime, conEndTime);
@@ -283,6 +295,8 @@ public class StudentController {
         List<Attendance> attendedList=attendanceRepo.findAll();
         System.out.println(attendedList);
         model.addAttribute("attendedList",attendedList);
+        model.addAttribute("subjectrepo",subjectRepo);
+        model.addAttribute("teacherrepo",teacherRepo);
         return "AttendanceTable";
     }
 
@@ -347,8 +361,10 @@ public class StudentController {
         int totallectures=lecturesRepo.getTotalLecturesByCourse(courseId);
         List<Student> studentList=studentRepo.findByCourseId(courseId);
         List<Course> courseList=courseRepo.findAll();
+
         model.addAttribute("studentList",studentList);
         model.addAttribute("attendanceRepo",attendanceRepo);
+        model.addAttribute("courseRepo",courseRepo);
         model.addAttribute("courseId",courseId);
         model.addAttribute("month",month);
         model.addAttribute("year",year);
