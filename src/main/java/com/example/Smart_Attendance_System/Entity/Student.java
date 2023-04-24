@@ -24,10 +24,36 @@ public class Student {
     String deptname;
     String collagename;
     Integer courseId;
+    Integer deptId;
     String address;
     String status;
     String password;
 
+
+    public Student(long enrollno, String usertype, String firstname, String lastname, String fathername, String mothername, String enrollyear, String dob, String gender, Integer age, String emailid, String country, String aadharno, String mobileno, String deptname, String collagename, Integer courseId,Integer deptId, String address, String status, String extension,String password) {
+        this.enrollno = enrollno;
+        this.usertype = usertype;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.fathername = fathername;
+        this.mothername = mothername;
+        this.enrollyear = enrollyear;
+        this.dob = dob;
+        this.gender = gender;
+        this.age = age;
+        this.emailid = emailid;
+        this.country = country;
+        this.aadharno = aadharno;
+        this.mobileno = mobileno;
+        this.deptname = deptname;
+        this.collagename = collagename;
+        this.courseId = courseId;
+        this.deptId = deptId;
+        this.address = address;
+        this.status=status;
+        this.extension=extension;
+        this.password=password;
+    }
     public String getPassword() {
         return password;
     }
@@ -55,30 +81,6 @@ public class Student {
 
     public void setExtension(String extension) {
         this.extension = extension;
-    }
-
-    public Student(long enrollno, String usertype, String firstname, String lastname, String fathername, String mothername, String enrollyear, String dob, String gender, Integer age, String emailid, String country, String aadharno, String mobileno, String deptname, String collagename, Integer courseId, String address, String status, String extension,String password) {
-        this.enrollno = enrollno;
-        this.usertype = usertype;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.fathername = fathername;
-        this.mothername = mothername;
-        this.enrollyear = enrollyear;
-        this.dob = dob;
-        this.gender = gender;
-        this.age = age;
-        this.emailid = emailid;
-        this.country = country;
-        this.aadharno = aadharno;
-        this.mobileno = mobileno;
-        this.deptname = deptname;
-        this.collagename = collagename;
-        this.courseId = courseId;
-        this.address = address;
-        this.status=status;
-        this.extension=extension;
-        this.password=password;
     }
 
     public long getEnrollno() {
@@ -147,6 +149,14 @@ public class Student {
 
     public String getGender() {
         return gender;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 
     public void setGender(String gender) {
@@ -224,7 +234,6 @@ public class Student {
     public void setAddress(String address) {
         this.address = address;
     }
-
     @Override
     public String toString() {
         return "Student{" +
@@ -237,18 +246,20 @@ public class Student {
                 ", enrollyear='" + enrollyear + '\'' +
                 ", dob='" + dob + '\'' +
                 ", gender='" + gender + '\'' +
-                ", age='" + age + '\'' +
+                ", age=" + age +
                 ", emailid='" + emailid + '\'' +
                 ", country='" + country + '\'' +
                 ", aadharno='" + aadharno + '\'' +
                 ", mobileno='" + mobileno + '\'' +
-                ", password='" + password + '\'' +
                 ", deptname='" + deptname + '\'' +
                 ", collagename='" + collagename + '\'' +
-                ", courseId='" + courseId + '\'' +
+                ", courseId=" + courseId +
+                ", deptId=" + deptId +
                 ", address='" + address + '\'' +
                 ", status='" + status + '\'' +
+                ", password='" + password + '\'' +
                 ", extension='" + extension + '\'' +
                 '}';
     }
+
 }

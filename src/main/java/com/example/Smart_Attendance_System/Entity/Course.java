@@ -11,6 +11,7 @@ public class Course {
     @Column(unique = true)
     String name;
     Integer departmentId;
+
     public Course() {
     }
 

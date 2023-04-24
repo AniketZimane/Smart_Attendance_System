@@ -200,8 +200,6 @@ public class TeacherController {
         model.addAttribute("curPage", 1);
         return "coursereg";
     }
-
-
     @GetMapping("/department/delete/{id}/")
     public String deleteDepartmentRecord(Model model, @PathVariable Integer id)
     {
@@ -419,6 +417,25 @@ public class TeacherController {
         model.addAttribute("attendedList",attendedList);
         model.addAttribute("subjectRepo",subjectRepo);
         return "teachersideattendance";
+    }
+
+    @GetMapping("/subjectteacher/delete/{id}/")
+    public String subjectDelete(Model model, @PathVariable Integer id)
+    {
+        teacherRepo.deleteById(id);
+        List<Teacher> teacherdata=teacherRepo.findAll();
+        System.out.println(teacherdata);
+
+        List<Department> departmentList=deparmentRepo.findAll();
+        List<Course> courseList=courseRepo.findAll();
+        List<Subject> subList=subjectRepo.findAll();
+        model.addAttribute("teacherdata",teacherdata);
+        model.addAttribute("departmentList",departmentList);
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("subList",subList);
+
+        model.addAttribute("subjectRepo",subjectRepo);
+        return "teacherandsubject";
     }
 
     @GetMapping("/GenerateAttendenceReport/delete/{id}/")
