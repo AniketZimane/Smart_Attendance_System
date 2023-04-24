@@ -56,9 +56,17 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
+    <script src="/assets/js/sweetalert.js"></script>
 </head>
 
 <body style="margin-top: 0px;padding-right: 0px;padding-left: 0px;">
+<script th:inline="javascript">
+       var msg=[[${msg}]]
+       if(msg!=null)
+       {
+               swal("Opps!", msg, "info");
+        }
+</script>
 <div th:replace="LatestFragment.html :: registration"></div>
     <div class="card">
         <div class="card-body" style="font-family: Adamina, serif;font-size: 24px;">

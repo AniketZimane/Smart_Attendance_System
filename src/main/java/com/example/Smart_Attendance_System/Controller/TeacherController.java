@@ -40,6 +40,8 @@ public class TeacherController {
     AttendanceRepo attendanceRepo;
     @Autowired
     LecturesRepo lecturesRepo;
+    @Autowired
+    TeacherSubjectRepo teacherSubjectRepo;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -67,35 +69,31 @@ public class TeacherController {
     }
     @PostMapping("/subdatadata/")
     public String subReg(Model model, String name, Integer idCourse) throws MessagingException, UnsupportedEncodingException {
+        String redirectpage = "subjectreg";
+        List<Subject> listofSujectExisting = subjectRepo.findByName(name);
+        if(listofSujectExisting.isEmpty())
+        {
+            subjectRepo.save(new Subject(name, idCourse));
+            List<Course> courseList=courseRepo.findAll();
+            List<Subject> subList=subjectRepo.findAll();
 
-        subjectRepo.save(new Subject(name, idCourse));
-        List<Course> courseList=courseRepo.findAll();
-        List<Subject> subList=subjectRepo.findAll();
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("subList",subList);
+            model.addAttribute("courseRepo", courseRepo);
+            model.addAttribute("msg","Subject Registration successful");
+            redirectpage="subjectreg";
+        }
+        else{
+            List<Course> courseList=courseRepo.findAll();
+            List<Subject> subList=subjectRepo.findAll();
 
-        model.addAttribute("courseList",courseList);
-        model.addAttribute("subList",subList);
-        model.addAttribute("courseRepo", courseRepo);
-        model.addAttribute("msg","Subject Registration successful");
-
-//        String from = "ad.developer@gmail.com";
-//        String to = "aniketzimane@gmail.com";
-//        MimeMessage message=mailSender.createMimeMessage();
-//        MimeMessageHelper helper=new MimeMessageHelper(message,"utf-8");
-////        SimpleMailMessage message=new SimpleMailMessage();
-//
-//
-//        String maiSubject="To verifying attendence";
-////        String mailContent="<h1>You have successfully marked your attendence please verify your attendence</h1><br>"
-////                +http:localhost:8080;
-//
-//        helper.setFrom(from,"Innovative Things");
-//        helper.setTo(to);
-//        helper.setSubject(maiSubject);
-//        helper.setText("To confirm your account, please click here : "
-//                +"http://localhost:8080/confirm-account?token=");
-////        helper.setText(mailContent,true);
-//        mailSender.send(message);
-        return "subjectreg";
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("subList",subList);
+            model.addAttribute("courseRepo", courseRepo);
+            model.addAttribute("msg","Subject Is already exist");
+            redirectpage="subjectreg";
+        }
+        return redirectpage;
     }
     @PostMapping("/teacherdata/")
     public String teacherReg(Model model, Teacher teacher)
@@ -173,7 +171,8 @@ public class TeacherController {
         {
             totalPages = 1;
         }
-
+        List<Department> departmentList=deparmentRepo.findAll();
+        model.addAttribute("departmentList",departmentList);
         model.addAttribute("listTech", listTech);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("curPage", 1);
@@ -200,8 +199,6 @@ public class TeacherController {
         model.addAttribute("curPage", 1);
         return "coursereg";
     }
-
-
     @GetMapping("/department/delete/{id}/")
     public String deleteDepartmentRecord(Model model, @PathVariable Integer id)
     {
@@ -347,10 +344,17 @@ public class TeacherController {
         return "teacherandsubject";
     }
     @PostMapping("/teachersubjectdata/")
-    public String teachersubjectdataregistration(Model model,Teacher tech)
+    public String teachersubjectdataregistration(Model model,Long teacherId,Integer subjectId)
     {
-        teacherRepo.save(tech);
+        teacherSubjectRepo.save(new TeacherSubject(teacherId,subjectId));
         List<Teacher> teacherdata=teacherRepo.findAll();
+        List<Department> departmentList=deparmentRepo.findAll();
+        List<Course> courseList=courseRepo.findAll();
+        List<Subject> subList=subjectRepo.findAll();
+        model.addAttribute("teacherdata",teacherdata);
+        model.addAttribute("departmentList",departmentList);
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("subList",subList);
         model.addAttribute("teacherdata",teacherdata);
         return"teacherandsubject";
     }
@@ -419,6 +423,25 @@ public class TeacherController {
         model.addAttribute("attendedList",attendedList);
         model.addAttribute("subjectRepo",subjectRepo);
         return "teachersideattendance";
+    }
+
+    @GetMapping("/subjectteacher/delete/{id}/")
+    public String subjectDelete(Model model, @PathVariable Integer id)
+    {
+        teacherRepo.deleteById(id);
+        List<Teacher> teacherdata=teacherRepo.findAll();
+        System.out.println(teacherdata);
+
+        List<Department> departmentList=deparmentRepo.findAll();
+        List<Course> courseList=courseRepo.findAll();
+        List<Subject> subList=subjectRepo.findAll();
+        model.addAttribute("teacherdata",teacherdata);
+        model.addAttribute("departmentList",departmentList);
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("subList",subList);
+
+        model.addAttribute("subjectRepo",subjectRepo);
+        return "teacherandsubject";
     }
 
     @GetMapping("/GenerateAttendenceReport/delete/{id}/")

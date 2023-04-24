@@ -67,7 +67,8 @@
                     <div class="col-12 col-sm-6 col-md-6">
                         <h3 class="text-dark mb-4" style="font-family: Adamina, serif;font-weight: bold;">Teacher Registration</h3>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 text-end" style="margin-bottom: 30px;"><a class="btn btn-primary" role="button" data-bs-target="#teachermodel" data-bs-toggle="modal"><i class="fa fa-user-plus"></i>New</a></div>
+                    <div class="col-12 col-sm-6 col-md-6 text-end" style="margin-bottom: 30px;">
+                        <button class="btn btn-primary" role="button" data-bs-target="#teachermodel" data-bs-toggle="modal"><i class="fa fa-user-plus"></i>New</button></div>
                 </div>
                 <div class="card" id="TableSorterCard">
                     <div class="card-header py-3">
@@ -95,7 +96,7 @@
                                             <td th:text="${teach.name}">Diseñador</td>
                                             <td th:text="${teach.department}">Diseñador</td>
                                             <td class="text-center align-middle" style="max-height: 60px;height: 60px;"><a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px;"   th:href="@{/tech/delete/{id}/(id = ${teach.id})}"><i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i></a>
-                                                <div class="modal fade" role="dialog" tabindex="-1" id="teachermodel" style="width: 500px;">
+                                                <div class="modal fade" role="dialog" tabindex="1" id="teachermodel" style="width: 500px;">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -115,13 +116,6 @@
 
                                                                                     </select>
                                                                                 </select></div>
-<!--                                                                            <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Subject</label><select class="form-select">-->
-<!--                                                                                    <optgroup label="This is a group">-->
-<!--                                                                                        <option value="12" selected="">This is item 1</option>-->
-<!--                                                                                        <option value="13">This is item 2</option>-->
-<!--                                                                                        <option value="14">This is item 3</option>-->
-<!--                                                                                    </optgroup>-->
-<!--                                                                                </select></div>-->
                                                                             <div class="form-group mb-3"><input class="form-control" type="text" placeholder="Username" name="username" required="" pattern="^[A-Za-z][A-Za-z0-9_]{7,29}$"></div>
                                                                             <div class="form-group mb-3"><input class="form-control" type="password" placeholder="Password" name="password" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></div>
                                                                             <div class="form-group mb-3"><input class="form-control" type="password" placeholder="Confirm Password" name="password2" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"></div><button class="btn btn-light d-block submit-button w-100" type="submit" style="background: var(--first-color);">Submit&nbsp;</button><button class="btn btn-light d-block submit-button w-100" type="reset" style="background: var(--bs-btn-active-border-color);">Reset</button>
