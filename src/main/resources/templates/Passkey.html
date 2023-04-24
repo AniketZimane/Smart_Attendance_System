@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>StudentDBM</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Adamina&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Aladin&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alkalami&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asset&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
+    <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
+    <link rel="stylesheet" href="/assets/css/Black-Navbar.css">
+    <link rel="stylesheet" href="/assets/css/Card-Store.css">
+    <link rel="stylesheet" href="/assets/css/Collapsible-Sidebar.css">
+    <link rel="stylesheet" href="/assets/css/Dark-Mode-Switch.css">
+    <link rel="stylesheet" href="/assets/css/FORM.css">
+    <link rel="stylesheet" href="/assets/css/Gamanet_Sidebar_bs5.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="/assets/css/Login-Box-En-login-box-en.css">
+    <link rel="stylesheet" href="/assets/css/login-form-styles.css">
+    <link rel="stylesheet" href="/assets/css/login-form.css">
+    <link rel="stylesheet" href="/assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
+    <link rel="stylesheet" href="/assets/css/Ludens---Create-Edit-Form.css">
+    <link rel="stylesheet" href="/assets/css/Ludens---Dark-Mode-Admin-Dashboard.css">
+    <link rel="stylesheet" href="/assets/css/Modern-Contact-Form.css">
+    <link rel="stylesheet" href="/assets/css/Multi-step-form.css">
+    <link rel="stylesheet" href="/assets/css/MUSA_form-wizard-form-wizard.css">
+    <link rel="stylesheet" href="/assets/css/MUSA_form-wizard.css">
+    <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="/assets/css/Pretty-Login-Form-.css">
+    <link rel="stylesheet" href="/assets/css/Responsive-Active-Navbar.css">
+    <link rel="stylesheet" href="/assets/css/select.css">
+    <link rel="stylesheet" href="/assets/css/side-menu.css">
+    <link rel="stylesheet" href="/assets/css/sidebar-1-style4.css">
+    <link rel="stylesheet" href="/assets/css/sidebar-1.css">
+    <link rel="stylesheet" href="/assets/css/Sidebar-navbar.css">
+    <link rel="stylesheet" href="/assets/css/SIdebar-Responsive-2-ResponsiveSideBar-2.css">
+    <link rel="stylesheet" href="/assets/css/SIdebar-Responsive-2.css">
+    <link rel="stylesheet" href="/assets/css/Sidebar.css">
+    <link rel="stylesheet" href="/assets/css/Soft-UI-Aside-Navbar.css">
+    <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
+    <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
+    <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
+    <script type="text/javascript">
+		var endpoint = '/VerifyAttendence/';
+            var data = {
+                params:
+                {
+                    passkey: [[${otp}]],
+                    emails: [[${emailList}]]
+                }
+            }
+
+            axios.post(endpoint, null, data)
+                .then(function(response) {
+
+                    if(response.data==0)
+                    {
+                           Swal.fire({
+                              icon: 'warning',
+                              title: 'Already Send',
+                              showConfirmButton: false,
+                              timer: 3000
+                        });
+                    }
+                    else
+                    {
+                          Swal.fire({
+                              icon: 'success',
+                              title: 'Attendance Mark Successfully',
+                              showConfirmButton: false,
+                              timer: 3000
+                        });
+                    }
+
+                })
+                .catch(function(error) {
+                    warning.play();
+                    Swal.fire({
+                              icon: 'error',
+                              title: 'something went wrong',
+                              showConfirmButton: false,
+                              timer: 3000
+                        });
+</script>
+</head>
+<body style="padding-left: 0px;padding-right: 0px;margin-top: 0px;background: var(--white-color);">
+<div th:replace="teacherDashboard.html :: teacherfragment"></div>
+<!--    <nav class="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button" style="background: rgb(34, 34, 34);border-radius: 20;border-top-left-radius: 20;border-top-right-radius: 20;border-bottom-right-radius: 20;border-bottom-left-radius: 20;border-style: none;padding-top: 0px;padding-bottom: 0px;margin: 0px;margin-bottom: 0px;padding-left: 0px;padding-right: 0px;margin-left: 0px;margin-right: 0px;margin-top: 0px;">-->
+<!--        <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>-->
+<!--            <div><a class="navbar-brand" href="#"><span>Creativarian </span> </a></div>-->
+<!--            <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">-->
+<!--                <ul class="navbar-nav nav-right">-->
+<!--                    <li class="nav-item"><a class="nav-link active" href="studentdashboard.html" style="color: rgba(224,217,217,0.9);">home </a></li>-->
+<!--                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="color: rgba(224,217,217,0.9);">Services </a>-->
+<!--                        <div class="dropdown-menu"><a class="dropdown-item" href="services.html">Price Packages</a><a class="dropdown-item" href="#">Order Services</a><a class="dropdown-item" href="#">Custom Request</a></div>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="about.html" style="color: rgba(224,217,217,0.9);">about </a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="faq.html" style="color: rgba(224,217,217,0.9);">faq </a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="contact.html" style="color: rgba(224,217,217,0.9);">contact </a></li>-->
+<!--                </ul>-->
+<!--                <p class="ms-auto navbar-text actions" style="text-align: right;"><a class="login" href="Login.html" style="color: rgba(224,217,217,0.9);">Log In</a> <a class="btn btn-light action-button" role="button" href="signup.html" style="color: rgba(0,0,0,0.9);background: var(&#45;&#45;bs-gray-200);border-radius: 10px;border-style: solid;border-color: rgba(0,0,0,0.9);font-size: 16px;padding: 5px 8px;">Sign Up</a></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </nav>-->
+    <div class="d-lg-flex justify-content-lg-center">
+        <div class="card d-lg-flex justify-content-lg-center" style="width: 21rem;border-top-left-radius: 20px;border-top-right-radius: 20px;border-bottom-right-radius: 20px;border-bottom-left-radius: 20px;box-shadow: 2px 2px 16px 8px rgba(0,0,0,0.1);min-width: 300px;border-style: none;max-width: 100%;margin: 16px;">
+            <div class="card-body border rounded d-flex flex-column justify-content-center align-items-lg-center" style="padding-bottom: 20px;height: 290px;background: var(--bs-gray-100);">
+                <div>
+                    <h6 th:text="${'Attended Student: ' + atcount}" class="text-muted d-inline d-lg-flex justify-content-lg-start mb-2" style="color: #757575;font-size: 20px;font-family: 'Source Sans Pro', sans-serif;font-weight: 600;border-bottom-right-radius: 10px;border-top-right-radius: 10px;margin-left: -20px;padding-left: 20px;padding-right: 8px;padding-bottom: 2px;background: #cdcf66;padding-top: 2px;text-align: left;">R$80,00 a R$300,00</h6>
+                    <h2 style="text-align: center;padding-top: 17px;margin-top: 0px;font-family: Adamina, serif;">Passkey</h2>
+                    <h4 th:text="${otp}" class="text-center" style="font-family: 'Source Sans Pro', sans-serif;font-weight: 700;color: rgb(255,160,0);margin-bottom: 8px;margin-top: 22px;">123456</h4>
+                </div><a class="btn btn-primary d-flex d-xl-flex justify-content-center align-items-center justify-content-xl-center align-items-xl-center" href="/verifypasskey/" data-bss-hover-animate="pulse" style="margin-top: 20px;background: #128C7E;border-style: none;padding-top: 8px;padding-bottom: 8px;box-shadow: 2px 2px 8px rgba(117,117,117,0.71);" target="_blank"><i class="fas fa-mail-bulk" style="color: rgb(255,255,255);font-size: 25px;margin-right: 16px;"></i>Send Verification Link</a>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
+    <script src="/assets/js/Billing-Table-with-Add-Row--Fixed-Header-Feature-Billing-Table-with-Add-Row--Fixed-Header.js"></script>
+    <script src="/assets/js/Collapsible-Sidebar-Sidebar.js"></script>
+    <script src="/assets/js/Dark-Mode-Switch-darkmode.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
+    <script src="/assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---1-Index-Table-with-Search--Sort-Filters.js"></script>
+    <script src="/assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js"></script>
+    <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-Ludens---Sleek-Image-Input-with-Preview.js"></script>
+    <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-main.js"></script>
+    <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-modalDelete.js"></script>
+    <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-theme.js"></script>
+    <script src="/assets/js/Multi-step-form-script.js"></script>
+    <script src="/assets/js/MUSA_form-wizard-form-wizard.js"></script>
+    <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
+    <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
+    <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
+</body>
+
+</html>

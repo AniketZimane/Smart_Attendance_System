@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -15,20 +16,37 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
-    <link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400|Roboto:300,400,700">
+    <link rel="stylesheet" href="/assets/css/Advanced-NavBar---Multi-dropdown.css">
     <link rel="stylesheet" href="/assets/css/Billing-Table-with-Add-Row--Fixed-Header-Feature.css">
+    <link rel="stylesheet" href="/assets/css/Black-Navbar.css">
     <link rel="stylesheet" href="/assets/css/Collapsible-Sidebar.css">
+    <link rel="stylesheet" href="/assets/css/Dark-Mode-Switch.css">
+    <link rel="stylesheet" href="/assets/css/FORM.css">
     <link rel="stylesheet" href="/assets/css/Gamanet_Sidebar_bs5.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link rel="stylesheet" href="/assets/css/Login-Box-En-login-box-en.css">
+    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient-Blue-gradient-login-form.css">
+    <link rel="stylesheet" href="/assets/css/Login-Form-blue-Gradient.css">
+    <link rel="stylesheet" href="/assets/css/login-form-styles.css">
+    <link rel="stylesheet" href="/assets/css/login-form.css">
     <link rel="stylesheet" href="/assets/css/Ludens---1-Index-Table-with-Search--Sort-Filters-v20.css">
     <link rel="stylesheet" href="/assets/css/Ludens---Create-Edit-Form.css">
     <link rel="stylesheet" href="/assets/css/Ludens---Dark-Mode-Admin-Dashboard.css">
     <link rel="stylesheet" href="/assets/css/Modern-Contact-Form.css">
+    <link rel="stylesheet" href="/assets/css/Multi-step-form.css">
+    <link rel="stylesheet" href="/assets/css/MUSA_form-wizard-form-wizard.css">
+    <link rel="stylesheet" href="/assets/css/MUSA_form-wizard.css">
     <link rel="stylesheet" href="/assets/css/Navbar-With-Button-icons.css">
+    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form-styles.css">
+    <link rel="stylesheet" href="/assets/css/OcOrato---Login-form.css">
+    <link rel="stylesheet" href="/assets/css/Pretty-Login-Form-.css">
+    <link rel="stylesheet" href="/assets/css/Responsive-Active-Navbar.css">
+    <link rel="stylesheet" href="/assets/css/select.css">
     <link rel="stylesheet" href="/assets/css/side-menu.css">
     <link rel="stylesheet" href="/assets/css/sidebar-1-style4.css">
     <link rel="stylesheet" href="/assets/css/sidebar-1.css">
@@ -40,52 +58,93 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
-    <script>
-function login()
-{
-    var username=document.getElementById("username).value;
-    var password=document.getElementById("passkey").value;
-    if(username=="Admin" && password=="1234567890")
-    {
-        window.location.assign("Dashboard.html");
-    }
-    else{
-    alert("Login failed");
-    }
-}
-</script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
-    <div class="d-flex flex-column justify-content-center" id="login-box">
-        <div class="login-box-header">
-            <h4 style="color: rgb(139,139,139);margin-bottom: 0px;font-weight: 400;font-size: 27px;">Login</h4>
-        </div>
-        <div class="login-box-content">
-            <div class="text-center d-flex fb-login box-shadow"><a class="d-xl-flex d-flex align-items-xl-start social-login-link" href="#" style="text-align: center;margin: 5px 0px 0px;"><i class="fa fa-facebook" style="margin-left: 0px;padding-right: 20px;padding-left: 22px;width: 56px;"></i>Login with Facebook</a></div>
-            <div class="gp-login box-shadow"><a class="d-flex flex-row align-items-center social-login-link" style="margin-bottom: 10px;" href="#"><i class="fa fa-google" style="color: rgb(255,255,255);width: 56px;"></i>Login with Google+</a></div>
-        </div>
-        <div class="d-flex flex-row align-items-center login-box-seperator-container">
-            <div class="login-box-seperator"></div>
-            <div class="login-box-seperator-text">
-                <p style="margin-bottom: 0px;padding-left: 10px;padding-right: 10px;font-weight: 400;color: rgb(201,201,201);">or</p>
+    <form method="post" action="/login">
+        <div class="d-flex flex-column justify-content-center" id="login-box">
+            <div class="login-box-header">
+                <h4 style="color: var(--bs-black);margin-bottom: 0px;font-weight: bold;font-size: 30px;font-family: Adamina, serif;background: var(--white-color);">Login Page</h4>
             </div>
-            <div class="login-box-seperator"></div>
-        </div>
-        <div class="email-login" style="background-color: #ffffff;"><input type="email" class="email-imput form-control" style="margin-top: 10px;" required="" placeholder="Username" minlength="6" id="username" name="username"><input type="password" id="passkey" class="password-input form-control" style="margin-top: 10px;" required="" placeholder="Password" minlength="6" name="passkey"></div>
-        <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;"><input type="submit" class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit"  value="Login" onclick="login()">
-            <div class="d-flex justify-content-between">
-                <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember" style="cursor: pointer;" name="check"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div><a id="forgot-password-link" href="#">Forgot Password?</a>
+
+            <div th:if="${param.error}" class="alert alert-danger">
+                Invalid username and password.
             </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+                You have been logged out.
+            </div>
+
+            <div class="d-flex flex-row align-items-center login-box-seperator-container">
+                <div class="login-box-seperator"></div>
+                <div class="login-box-seperator-text"></div>
+                <div class="login-box-seperator"></div>
+            </div>
+            <div class="email-login" style="background-color: #ffffff;"><input class="form-control email-imput form-control" type="text" style="margin-top: 10px;" required="" placeholder="Username" minlength="6" name="username"><input class="form-control password-input form-control" type="password" style="margin-top: 10px;" required="" placeholder="Password" minlength="6" name="password"></div>
+            <div class="submit-row" style="margin-bottom: 8px;padding-top: 0px;"><button class="btn btn-primary d-block box-shadow w-100" id="submit-id-submit" type="submit">Login</button>
+                <div class="d-flex justify-content-between">
+                    <div class="form-check form-check-inline" id="form-check-rememberMe"><input class="form-check-input" type="checkbox" id="formCheck-1" for="remember_me" style="cursor: pointer;" name="remember_me"><label class="form-check-label" for="formCheck-1"><span class="label-text">Remember Me</span></label></div>
+<!--                    <a id="forgot-password-link" href="/forgotPassword/">Forgot Password?</a>-->
+                </div>
+            </div>
+<!--            <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">-->
+<!--                <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#">Sign Up!</a></p>-->
+<!--            </div>-->
         </div>
-        <div id="login-box-footer" style="padding: 10px 20px;padding-bottom: 23px;padding-top: 18px;">
-            <p style="margin-bottom: 0px;">Don't you have an account?<a id="register-link" href="#">Sign Up!</a></p>
-        </div>
-    </div>
+    </form>
+<!--    <script>-->
+<!--        var endpoint = '/verifyLogin/';-->
+<!--            var data = {-->
+<!--                params:-->
+<!--                {-->
+<!--                    enrollno: enrollno,-->
+<!--                    password: password-->
+
+<!--                }-->
+<!--            }-->
+
+<!--            axios.post(endpoint, null, data)-->
+<!--                .then(function(response) {-->
+
+<!--                    if(response.data==0)-->
+<!--                    {-->
+<!--                           Swal.fire({-->
+<!--                              icon: 'warning',-->
+<!--                              title: 'Already marked',-->
+<!--                              showConfirmButton: false,-->
+<!--                              timer: 3000-->
+<!--                        });-->
+<!--                    }-->
+<!--                    else-->
+<!--                    {-->
+<!--                          Swal.fire({-->
+<!--                              icon: 'success',-->
+<!--                              title: 'Attendance Mark Successfully',-->
+<!--                              showConfirmButton: false,-->
+<!--                              timer: 3000-->
+<!--                        });-->
+<!--                    }-->
+
+<!--                })-->
+<!--                .catch(function(error) {-->
+<!--                var warning = new Audio('/assets/sound/beep-warning.wav');-->
+<!--                    console.log(error);-->
+<!--                    warning.play();-->
+<!--                    Swal.fire({-->
+<!--                              icon: 'error',-->
+<!--                              title: 'something went wrong',-->
+<!--                              showConfirmButton: false,-->
+<!--                              timer: 3000-->
+<!--                        });-->
+
+<!--    </script>-->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>
     <script src="/assets/js/Billing-Table-with-Add-Row--Fixed-Header-Feature-Billing-Table-with-Add-Row--Fixed-Header.js"></script>
     <script src="/assets/js/Collapsible-Sidebar-Sidebar.js"></script>
+    <script src="/assets/js/Dark-Mode-Switch-darkmode.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
@@ -99,9 +158,12 @@ function login()
     <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-main.js"></script>
     <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-modalDelete.js"></script>
     <script src="/assets/js/Ludens---Dark-Mode-Admin-Dashboard-theme.js"></script>
+    <script src="/assets/js/Multi-step-form-script.js"></script>
+    <script src="/assets/js/MUSA_form-wizard-form-wizard.js"></script>
+    <script src="/assets/js/Responsive-Active-Navbar-script.js"></script>
     <script src="/assets/js/Ultimate-Sidebar-Menu-BS5-ninjasidebar.js"></script>
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
-
 </html>

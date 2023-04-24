@@ -2,9 +2,14 @@ package com.example.Smart_Attendance_System.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 public class Attendance {
@@ -14,30 +19,27 @@ public class Attendance {
     Integer id;
     @UpdateTimestamp
             @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss:sss")
-    LocalDateTime dateTime;
+    LocalDateTime attendanceTime;
+    @CreationTimestamp
+    LocalDate attendanceDate;
+    LocalTime startTime;
+    LocalTime endTime;
     Integer subId;
     Long teacherId;
-    Long studId;
-    String department;
+    Long enrollno;
+    String email;
+
 
     public Attendance() {
     }
 
-    public Attendance(LocalDateTime dateTime, Long teacherId, Long studId,String department) {
-        this.dateTime = dateTime;
+    public Attendance(Integer subId, Long teacherId, Long enrollno, LocalTime startTime, LocalTime endTime,String email) {
+        this.startTime = startTime;
+        this.email = email;
+        this.endTime = endTime;
+        this.subId = subId;
         this.teacherId = teacherId;
-        this.studId = studId;
-        this.department = department;
-    }
-
-
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
+        this.enrollno = enrollno;
     }
 
     public Integer getId() {
@@ -48,14 +50,45 @@ public class Attendance {
         this.id = id;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDateTime getAttendanceTime() {
+        return attendanceTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setAttendanceTime(LocalDateTime attendanceTime) {
+        this.attendanceTime = attendanceTime;
     }
 
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public Long getEnrollno() {
+        return enrollno;
+    }
+
+    public void setEnrollno(Long enrollno) {
+        this.enrollno = enrollno;
+    }
+
+    public void setStartTime(LocalTime stratTime) {
+        this.startTime = stratTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Integer getSubId() {
+        return subId;
+    }
+
+    public void setSubId(Integer subId) {
+        this.subId = subId;
+    }
 
     public Long getTeacherId() {
         return teacherId;
@@ -65,23 +98,33 @@ public class Attendance {
         this.teacherId = teacherId;
     }
 
-    public Long getStudId() {
-        return studId;
+    public Long getenrollno() {
+        return enrollno;
     }
 
-    public void setStudId(Long studId) {
-        this.studId = studId;
+    public void setenrollno(Long enrollno) {
+        this.enrollno = enrollno;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return "Attendance{" +
                 "id=" + id +
-                ", dateTime=" + dateTime +
+                ", attendanceTime=" + attendanceTime +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", subId=" + subId +
                 ", teacherId=" + teacherId +
-                ", studId=" + studId +
-                ", department='" + department + '\'' +
+                ", enrollno=" + enrollno +
+                ", email='" + email + '\'' +
                 '}';
     }
-
 }

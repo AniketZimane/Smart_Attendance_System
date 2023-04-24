@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>StudentDBM</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL&amp;display=swap">
@@ -51,10 +52,10 @@
 <div th:replace="Sidebar.html :: updatefragment"></div>
     <div class="container">
         <div class="card border rounded" style="width: auto;height: auto;background: var(--white-color);margin: auto;margin-top: 100px;">
-            <div class="card-body d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center justify-content-xxl-center" style="color: var(--bs-card-bg);background: var(--white-color);">
+            <div  id="identycardclick" class="card-body d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex d-xxl-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center justify-content-xl-center justify-content-xxl-center" style="color: var(--bs-card-bg);background: var(--white-color);">
                 <div id="cardEntrada-2" class="p-4 text-center shadow-lg m-5 rounded-5" style="background: linear-gradient(171deg, var(--bs-pink) 0%, var(--bs-indigo) 100%), var(--bs-purple);max-width: 500px;">
                     <div style="display: flex; justify-content: center; text-align: center;" id="qrcode"></div>
-                    <h3 class="d-sm-flex justify-content-sm-start text-white text-center pt-2" style="font-family: Alkalami, serif;max-height: 500px;" th:text="${'Name: ' + stud.firstname +' '+ stud.fathername +' '+ stud.lastname}"></h3>
+                    <h3 class="d-sm-flex justify-content-sm-start text-white text-center pt-2" style="font-family: Alkalami, serif;max-height: 500px;color: black;" th:text="${'Name: ' + stud.firstname +' '+ stud.fathername +' '+ stud.lastname}"></h3>
                     <h3 class="d-sm-flex justify-content-sm-start text-white text-center pt-2" style="font-family: 'Abyssinica SIL', serif;" th:text="${'Enrollment no: ' + stud.enrollno}"></h3>
                     <h3 class="d-sm-flex justify-content-sm-start text-white text-center pt-2" style="font-family: 'Abyssinica SIL', serif;" th:text="${'Department: ' + stud.deptname}"></h3>
                     <hr class="text-white"><img src="/assets/img/logo.png" style="width: 25%;">
@@ -66,6 +67,9 @@
     </div>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
 <!--    <script src="/assets/js/Billing-Table-with-Add-Row&#45;&#45;Fixed-Header-Feature-Billing-Table-with-Add-Row&#45;&#45;Fixed-Header.js"></script>-->
     <script src="/assets/js/Collapsible-Sidebar-Sidebar.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
@@ -85,30 +89,26 @@
     <script src="/assets/js/zectStudio---Sidebar-Menu-by-bbbootstrap-sidemenu.js"></script>
     <script th:inline="javascript">
    const Qrelement=document.getElementById('qrcode');
-   const userid=[[${stud.enrollno}]];
+   var userid=[[${stud.enrollno}]];
+   console.log(userid)
    new QRCode(Qrelement,{
-   text:userid,
+   text:"AttendanceId:"+userid,
    width:150,
    height:150});
 <!--   $("#- > img").css({"margin":"auto"});-->
 </script>
     <script>
     $("#downloadbtn").on('click', function () {
-                html2canvas(document.getElementById("cardEntrada-2")).then(function (canvas) {
+                html2canvas(document.getElementById("identycardclick")).then(function (canvas) {
                    var anchorTag = document.createElement("a");
                     document.body.appendChild(anchorTag);
 <!--                    document.getElementById("previewImg").appendChild(canvas);-->
-                    anchorTag.download = "IdCard.jpg";
+                    anchorTag.download =[[${stud.enrollno}]]+".jpg";
                     anchorTag.href = canvas.toDataURL();
                     anchorTag.target = '_blank';
                     anchorTag.click();
                 });
     });
-<!--    $(document).ready(function(){-->
-<!--    $('#downloadbtn').click(function(){-->
-<!--    $('#cardEntrada-2').printThis();-->
-<!--    });-->
-<!--    });-->
 </script>
 
 </body>

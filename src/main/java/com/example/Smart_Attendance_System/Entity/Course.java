@@ -7,23 +7,26 @@ public class Course {
     @Id
             @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_seq")
             @SequenceGenerator(name="course_seq")
-    Integer id;
+    Integer courseId;
+    @Column(unique = true)
     String name;
+    Integer departmentId;
 
     public Course() {
     }
 
-    public Course(Integer id, String name) {
-        this.id = id;
+    public Course(Integer courseId, String name, Integer departmentId) {
+        this.courseId = courseId;
         this.name = name;
+        this.departmentId = departmentId;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     public String getName() {
@@ -34,11 +37,20 @@ public class Course {
         this.name = name;
     }
 
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
-                "id=" + id +
+                "courseId=" + courseId +
                 ", name='" + name + '\'' +
+                ", departmentId=" + departmentId +
                 '}';
     }
 }
