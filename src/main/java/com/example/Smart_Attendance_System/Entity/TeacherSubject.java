@@ -11,13 +11,15 @@ public class TeacherSubject {
     Integer id;
     Long teacherId;
     Integer subjectId;
+    Integer courseId;
 
     public TeacherSubject() {
     }
 
-    public TeacherSubject(Long teacherId, Integer subjectId) {
+    public TeacherSubject(Long teacherId, Integer subjectId, Integer courseId) {
         this.teacherId = teacherId;
         this.subjectId = subjectId;
+        this.courseId = courseId;
     }
 
     public Integer getId() {
@@ -44,12 +46,21 @@ public class TeacherSubject {
         this.subjectId = subjectId;
     }
 
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
+
     @Override
     public String toString() {
         return "TeacherSubject{" +
                 "id=" + id +
                 ", teacherId=" + teacherId +
                 ", subjectId=" + subjectId +
+                ", courseId=" + courseId +
                 '}';
     }
 }

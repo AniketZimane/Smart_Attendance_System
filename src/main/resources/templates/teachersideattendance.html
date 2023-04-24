@@ -94,8 +94,8 @@
                             <tbody class="text-center">
                             <tr style="background: var(--bs-card-bg);" th:each="stud : ${attendedList}">
                                 <td th:text="${stud.enrollno}">1234567890</td>
-                                <td th:text="${stud.subId}">1234567890</td>
-<!--                                <td th:text="${subjectRepo.findNameBySubjectId(stud.subId)}">Java</td>-->
+<!--                                <td th:text="${stud.subId}">1234567890</td>-->
+                                <td th:text="${subjectRepo.getNameById(stud.subId)}">Java</td>
                                 <td th:text="${stud.startTime}">Parulekar sir</td>
                                 <td th:text="${stud.endTime}">Parulekar sir</td>
                                 <td th:text="${stud.attendanceTime}">Parulekar sir</td>
