@@ -69,7 +69,6 @@
                     <h4 style="font-family: Aladin, serif;font-style: italic;font-weight: bold;" th:text="'Enrollment No:-'+${student.enrollno}">Enrollment No</h4>
                     <h4 style="font-weight: bold;font-style: italic;font-family: Adamina, serif;"th:text="'Course Name:-'+${course.name}">Course Id</h4>
                     <h4 style="font-weight: bold;font-style: italic;font-family: Adamina, serif;" th:text="'Attendace:-'+${atpersent}">Attendace</h4>
-                    <h4 style="font-weight: bold;font-style: italic;font-family: Adamina, serif;">Status</h4>
                     <div class="progress" style="margin-top: 50px;height: 30px;">
                         <div class="progress-bar" th:aria-valuenow="${atpersent}" aria-valuemin="0" aria-valuemax="100" th:style="'width: ' + ${atpersent}+'%'" th:text="${atpersent}">50%</div>
                     </div>

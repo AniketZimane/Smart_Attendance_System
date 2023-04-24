@@ -43,11 +43,23 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <script src="/assets/js/axios.js"></script>
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/sweetalert.js"></script>
+    <script src="/assets/js/registrationHandler.js"></script>
 
 </head>
 
 <body style="background: var(--bs-gray-300);">
+<script th:inline="javascript">
+       var msg=[[${msg}]]
+       if(msg!=null)
+       {
+               swal("Good Job!", msg, "success");
+        }
+</script>
 <div th:replace="Sidebar.html :: updatefragment"></div>
     <div class="container" style="background: var(--bs-gray-200);">
         <div class="card" style="margin-top: 80px;">
@@ -81,16 +93,17 @@
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Aadhar No*</label><input class="form-control" type="text" placeholder="Aadhar Number" name="aadharno" th:value="${stud?.aadharno}" required=""></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Mobile No*</label><input class="form-control" type="text" placeholder="Mobile No" name="mobileno" th:value="${stud?.mobileno}" required="" pattern="^\d{10}$"></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Collage/University Name*</label><input class="form-control" type="text" name="collagename" placeholder="Collage/University Name" inputmode="numeric" th:value="${stud?.collagename}" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Department*</label><select class="form-select" name="deptname"  required="">
-                            <option value="Computer Engineering" th:selected="${stud?.deptname == 'Computer Engineering'}">Computer Engineering</option>
-                            <option value="Electrical Engineering" th:selected="${stud?.deptname == 'Electrical Engineering'}">Electrical Engineering</option>
-                            <option value="Electronic and TelecommunicationEngineering" th:selected="${stud?.deptname == 'Electronic and TelecommunicationEngineering'}">Electronic and TelecommunicationEngineering</option>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Department*</label>
+                        <select class="form-select" id="deptname" name="deptname"  required="">
+                            <option value="" disabled="" selected> Select Department</option>
+                           <option th:each="dept :${departmentList}" th:text="${dept.deptname}" th:value="${dept.deptname}" th:selected="${stud?.deptname}">1</option>
                         </select></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Course*</label><select class="form-select" name="courseId" required="">
-                            <option th:each="course :${courseList}" th:text="${course.name}" th:value="${course.courseId}" th:selected="${stud?.courseId == '1'}">1</option>
+                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Course*</label>
+                        <select class="form-select" id="courseId" name="courseId" required="">
+                            <option value="" disabled="" selected> Select Course</option>
                         </select></div>
                     <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Password*</label><input class="form-control" type="password" name="password" placeholder="Password" inputmode="numeric" required=""></div>
-                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Confirm Password*</label><input class="form-control" type="password" name="password2" placeholder="Password" inputmode="numeric" required=""></div>
+<!--                    <div class="col-12 col-md-6 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Confirm Password*</label><input class="form-control" type="password" name="password2" placeholder="Password" inputmode="numeric" required=""></div>-->
                     <div class="col-12 col-sm-12 col-md-12 col-lg-3 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Upload Profile Picture</label><input class="form-control" type="file" name="file" required="" accept="image/png"></div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 order-4" style="margin-top: 12px;"><label class="form-label fw-bold">Address</label><textarea class="form-control"  placeholder="Address" name="address" th:value="${stud?.address}" required=""></textarea>
                         <hr class="my-4">

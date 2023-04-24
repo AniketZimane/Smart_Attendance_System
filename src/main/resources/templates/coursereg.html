@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>StudentDBM</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abyssinica+SIL&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Adamina&amp;display=swap">
@@ -56,9 +57,44 @@
     <link rel="stylesheet" href="/assets/css/Ultimate-Sidebar-Menu-BS5.css">
     <link rel="stylesheet" href="/assets/css/Vertical-Left-SideBar-by-Jigar-Mistry.css">
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
+    <script src="/assets/js/sweetalert.js"></script>
 </head>
-
 <body style="padding: 0px;margin-top: 0px;">
+<script th:inline="javascript">
+       var msg=[[${msg}]]
+       var msge=[[${msge}]]
+       if(msg!=null)
+       {
+               swal("Good job!", msg, "success");
+        }
+        if(msge!=null)
+       {
+               swal("Opps!", msge, "info");
+        }
+        function filterTbl(input) {
+		  var input, filter, table, tr, td, cell, i, j;
+		  input = document.getElementById("tsearch");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("ipi-table");
+		  tr = table.getElementsByTagName("tr");
+		  for (i = 1; i < tr.length; i++) {
+		    // Hide the row initially.
+		    tr[i].style.display = "none";
+
+		    td = tr[i].getElementsByTagName("td");
+		    for (var j = 0; j < td.length; j++) {
+		      cell = tr[i].getElementsByTagName("td")[j];
+		      if (cell) {
+		        if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+		          tr[i].style.display = "";
+		          break;
+		        }
+		      }
+		    }
+		  }
+		}
+
+</script>
 <div th:replace="LatestFragment.html :: registration"></div>
     <div class="card">
         <div class="card-body">
@@ -84,8 +120,12 @@
             <div class="card" id="TableSorterCard">
                 <div class="card-header py-3">
                     <div class="row table-topper align-items-center">
-                        <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;"><input type="text" placeholder="Search" name="tsearch"></div>
-                        <div class="col-12 col-sm-7 col-md-6 text-end" style="margin: 0px;padding: 5px 15px;"><button class="btn btn-warning btn-sm" id="zoom_in" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;background: var(--bs-primary);"><i class="fa fa-print"></i></button><button class="btn btn-warning btn-sm" id="zoom_in-1" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-plus"></i></button><button class="btn btn-warning btn-sm" id="zoom_out" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-minus"></i></button></div>
+                        <div class="col-12 col-sm-5 col-md-6 text-start" style="margin: 0px;padding: 5px 15px;"><input type="text" placeholder="Search" id="tsearch" onkeyup="filterTbl()"></div>
+                        <div class="col-12 col-sm-7 col-md-6 text-end" style="margin: 0px;padding: 5px 15px;">
+                            <button class="btn btn-warning btn-sm" id="zoom_in-1" type="button" onclick="saveTableAsPDF()" style="margin: 2px;background: var(--bs-info);"><i class="fa fa-print"></i>
+                                <button class="btn btn-warning btn-sm" id="zoom_in" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-plus"></i></button>
+                            </button><button class="btn btn-warning btn-sm" id="zoom_out" type="button" zoomclick="ChangeZoomLevel(-10);" style="margin: 2px;"><i class="fa fa-search-minus"></i></button>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -122,6 +162,19 @@
             </div>
         </div>
     </div>
+<script>
+function saveTableAsPDF() {
+  const table = document.getElementById("ipi-table");
+  html2canvas(table).then(function(canvas) {
+    const imgData = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.download = "table.png";
+    link.href = imgData;
+    link.click();
+  });
+}
+    </script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>
     <script src="/assets/js/Advanced-NavBar---Multi-dropdown-main.js"></script>

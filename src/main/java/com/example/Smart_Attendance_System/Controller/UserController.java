@@ -55,6 +55,8 @@ public class UserController {
         }
         if (password.equals(originalpassword))
         {
+            model.addAttribute("enrollno",enrollno);
+            model.addAttribute("studentRepo",studentRepo);
             model.addAttribute("stud",stu);
             model.addAttribute("msg","Login successfull");
             System.out.println("Login successfull");
@@ -132,6 +134,7 @@ public class UserController {
     {
         List<Attendance> attendanceList=attendanceRepo.findByEnrollno(enrollno);
         model.addAttribute("attendanceList",attendanceList);
+        model.addAttribute("subjectRepo",subjectRepo);
         return "StudentAttendancetable";
     }
 

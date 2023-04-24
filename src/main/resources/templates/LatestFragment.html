@@ -55,9 +55,9 @@
     <link rel="stylesheet" href="/assets/css/zectStudio---Sidebar-Menu-by-bbbootstrap.css">
 </head>
 
-<body style="padding-left: 0px;margin-top: 0px;padding-right: 0px;color: var(--white-color);">
+<body style="padding-left: 0px;margin-top: 50px;padding-right: 0px;color: var(--white-color);">
 <div th:fragment="registration">
-    <nav class="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button" style="background: var(--first-color);border-radius: 20;border-top-left-radius: 20;border-top-right-radius: 20;border-bottom-right-radius: 20;border-bottom-left-radius: 20;border-style: none;padding-top: 0;padding-bottom: 10px;">
+    <nav class="navbar navbar-light navbar-expand-md navbar-fixed-top navigation-clean-button" style="background: var(--first-color);border-radius: 20;border-top-left-radius: 20;border-top-right-radius: 20;border-bottom-right-radius: 20;border-bottom-left-radius: 20;border-style: none;padding-top: 0;padding-bottom: 0px;">
         <div class="container"><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div><a class="navbar-brand" href="/admindashboard/"><span style="font-family: Adamina, serif;font-size: 20px;color: var(--white-color);">Innovative Things</span> </a></div>
             <div class="collapse navbar-collapse" id="navcol-1" style="color: rgb(255,255,255);">
@@ -66,9 +66,11 @@
                     <li class="nav-item"><a class="nav-link" href="/courseRegistration/" style="color: rgba(224,217,217,0.9);">Course Registration</a></li>
                     <li class="nav-item"><a class="nav-link" href="/subjectRegistration/" style="color: rgba(224,217,217,0.9);">Subject Registration</a></li>
                     <li class="nav-item"><a class="nav-link" href="/teacherRegistration/" style="color: rgba(224,217,217,0.9);">Teacher Registration</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/passkey/" style="color: rgba(224,217,217,0.9);">Passkey</a></li>
+<!--                    <li class="nav-item"><a class="nav-link" href="/passkey/" style="color: rgba(224,217,217,0.9);">Passkey</a></li>-->
                 </ul>
-                <p class="ms-auto navbar-text actions" style="text-align: right;"><a class="login" href="Login.html" style="color: rgba(224,217,217,0.9);">Log In</a> <a class="btn btn-light action-button" role="button" href="/logout/" style="color: rgba(0,0,0,0.9);background: var(--bs-gray-200);border-radius: 10px;border-style: solid;border-color: rgba(0,0,0,0.9);font-size: 16px;padding: 5px 8px;">Logout</a></p>
+                <p class="ms-auto navbar-text actions" style="text-align: right;">
+                    <a class="btn btn-light action-button" role="button" href="/logout" style="color: rgba(0,0,0,0.9);background: var(--bs-gray-200);border-radius: 10px;border-style: solid;border-color: rgba(0,0,0,0.9);font-size: 16px;padding: 5px 8px;">Logout</a></p>
+
             </div>
         </div>
     </nav>

@@ -12,8 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
-<body>
-    <video id="preview" style="align:center"></video>
+<body bgcolor="black">
+    <center><video id="preview" style="align:center"></video></center>
     <script type="text/javascript">
 <!--      var beepsound = new Audio('/assets/sound/beep.wav');-->
 <!--      var warning = new Audio('/assets/sound/beep-warning.wav');-->
@@ -21,9 +21,6 @@
 
       scanner.addListener('scan', function (content)
       {
-
-
-
 		var endpoint = '/markattendance/';
             var data = {
                 params:
@@ -75,9 +72,6 @@
                         });
 
 });
-
-
-
 
       });
       Instascan.Camera.getCameras().then(function (cameras) {

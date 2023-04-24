@@ -5,6 +5,7 @@ import com.example.Smart_Attendance_System.Entity.*;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
@@ -25,7 +26,8 @@ import java.util.stream.Collectors;
 
 @Controller
 public class TeacherController {
-
+    @Autowired
+    HttpSession session;
     @Autowired
     StudentRepo studentRepo;
     @Autowired
@@ -40,71 +42,108 @@ public class TeacherController {
     AttendanceRepo attendanceRepo;
     @Autowired
     LecturesRepo lecturesRepo;
+    @Autowired
+    TeacherSubjectRepo teacherSubjectRepo;
 
     @Autowired
     private JavaMailSender mailSender;
 
     int maxSize=5;
     @PostMapping("/departmentdata/")
-    public String deptreg(Model model, Department department)
+    public String deptreg(Model model,String deptname )
     {
-        deparmentRepo.save(department);
-        List<Department> departmentList=deparmentRepo.findAll();
-        model.addAttribute("departmentList",departmentList);
-        model.addAttribute("msg","Department Registration successful");
-        return "departmentreg";
+        List<Department> listofDeparmentExisting = deparmentRepo.findByDeptname(deptname);
+        if(listofDeparmentExisting.isEmpty()) {
+            deparmentRepo.save(new Department(deptname));
+            List<Department> departmentList=deparmentRepo.findAll();
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("msg","Department Registration successful");
+            return "departmentreg";
+        }
+        else{
+
+            List<Department> departmentList=deparmentRepo.findAll();
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("msge","Department is already exist");
+            return "departmentreg";
+        }
+
     }
     @PostMapping("/coursedata/")
-    public String courseReg(Model model, Course cos)
+    public String courseReg(Model model, Integer courseId, String name, Integer departmentId)
     {
-        courseRepo.save(cos);
+        List<Course> listofCourseExisting = courseRepo.findByname(name);
+        if(listofCourseExisting.isEmpty())
+        {
+            courseRepo.save(new Course(courseId,name,departmentId));
+            List<Course> courseList=courseRepo.findAll();
+            List<Department> departmentList=deparmentRepo.findAll();
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("msg","Course Registration successful");
+            return "coursereg";
+
+        }
         List<Course> courseList=courseRepo.findAll();
         List<Department> departmentList=deparmentRepo.findAll();
         model.addAttribute("departmentList",departmentList);
         model.addAttribute("courseList",courseList);
-        model.addAttribute("msg","Course Registration successful");
+        model.addAttribute("msge","Course Already exist");
         return "coursereg";
     }
     @PostMapping("/subdatadata/")
     public String subReg(Model model, String name, Integer idCourse) throws MessagingException, UnsupportedEncodingException {
+        String redirectpage = "subjectreg";
+        List<Subject> listofSujectExisting = subjectRepo.findByName(name);
+        if(listofSujectExisting.isEmpty())
+        {
+            subjectRepo.save(new Subject(name, idCourse));
+            List<Course> courseList=courseRepo.findAll();
+            List<Subject> subList=subjectRepo.findAll();
 
-        subjectRepo.save(new Subject(name, idCourse));
-        List<Course> courseList=courseRepo.findAll();
-        List<Subject> subList=subjectRepo.findAll();
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("subList",subList);
+            model.addAttribute("courseRepo", courseRepo);
+            model.addAttribute("msg","Subject Registration successful");
+            redirectpage="subjectreg";
+        }
+        else{
+            List<Course> courseList=courseRepo.findAll();
+            List<Subject> subList=subjectRepo.findAll();
 
-        model.addAttribute("courseList",courseList);
-        model.addAttribute("subList",subList);
-        model.addAttribute("courseRepo", courseRepo);
-        model.addAttribute("msg","Subject Registration successful");
-
-//        String from = "ad.developer@gmail.com";
-//        String to = "aniketzimane@gmail.com";
-//        MimeMessage message=mailSender.createMimeMessage();
-//        MimeMessageHelper helper=new MimeMessageHelper(message,"utf-8");
-////        SimpleMailMessage message=new SimpleMailMessage();
-//
-//
-//        String maiSubject="To verifying attendence";
-////        String mailContent="<h1>You have successfully marked your attendence please verify your attendence</h1><br>"
-////                +http:localhost:8080;
-//
-//        helper.setFrom(from,"Innovative Things");
-//        helper.setTo(to);
-//        helper.setSubject(maiSubject);
-//        helper.setText("To confirm your account, please click here : "
-//                +"http://localhost:8080/confirm-account?token=");
-////        helper.setText(mailContent,true);
-//        mailSender.send(message);
-        return "subjectreg";
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("subList",subList);
+            model.addAttribute("courseRepo", courseRepo);
+            model.addAttribute("msge","Subject Is already exist");
+            redirectpage="subjectreg";
+        }
+        return redirectpage;
     }
     @PostMapping("/teacherdata/")
-    public String teacherReg(Model model, Teacher teacher)
+    public String teacherReg(Model model, String name, String department, String username, String password,String course, String subject)
     {
-        teacherRepo.save(teacher);
-        List<Teacher> teacherList=teacherRepo.findAll();
-        model.addAttribute("teacherList",teacherList);
-        model.addAttribute("msg","Teacher Registration successful");
-        return "teacherreg";
+        String redirectpage="teacherreg";
+        List<Teacher> listofteacherExisting = teacherRepo.findByName(name);
+        if(listofteacherExisting.isEmpty())
+        {
+            teacherRepo.save(new Teacher(name,department,username,password,course,subject));
+            List<Teacher> teacherList=teacherRepo.findAll();
+            List<Department> departmentList=deparmentRepo.findAll();
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("teacherList",teacherList);
+            model.addAttribute("msg","Teacher Registration successful");
+            redirectpage="teacherreg";
+        }
+        else{
+            List<Teacher> teacherList=teacherRepo.findAll();
+            model.addAttribute("teacherList",teacherList);
+            List<Department> departmentList=deparmentRepo.findAll();
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("msge","This teacher is already exist");
+            redirectpage="teacherreg";
+        }
+
+        return redirectpage;
     }
     @GetMapping("/departmentRegistration/")
     public String deotReg(Model model)
@@ -173,7 +212,8 @@ public class TeacherController {
         {
             totalPages = 1;
         }
-
+        List<Department> departmentList=deparmentRepo.findAll();
+        model.addAttribute("departmentList",departmentList);
         model.addAttribute("listTech", listTech);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("curPage", 1);
@@ -200,8 +240,6 @@ public class TeacherController {
         model.addAttribute("curPage", 1);
         return "coursereg";
     }
-
-
     @GetMapping("/department/delete/{id}/")
     public String deleteDepartmentRecord(Model model, @PathVariable Integer id)
     {
@@ -287,6 +325,9 @@ public class TeacherController {
         }
         if (password.equals(originalpassword))
         {
+            session.setAttribute("tcid",id);
+            List<Subject> teacherSubjectList=teacherSubjectRepo.findSubjectByTeacherId(id);
+            System.out.println("Teacher subjectlist:"+teacherSubjectList.toString());
             List<Department> departmentList=deparmentRepo.findAll();
             List<Teacher> teacherList=teacherRepo.findAll();
             System.out.println(departmentList);
@@ -295,6 +336,7 @@ public class TeacherController {
             List<Lectures> lecturesList=lecturesRepo.findAll();
             System.out.println(lecturesList);
             model.addAttribute("departmentList",lecturesList);
+            model.addAttribute("teacherSubjectList",teacherSubjectList);
             model.addAttribute("teacherList",teacherList);
 
             model.addAttribute("departmentList",departmentList);
@@ -340,6 +382,11 @@ public class TeacherController {
         List<Course> courseList=courseRepo.findAll();
         List<Subject> subList=subjectRepo.findAll();
         List<Teacher> teacherdata=teacherRepo.findAll();
+        List<TeacherSubject> teacherSubjectList=teacherSubjectRepo.findAll();
+        model.addAttribute("teacherRepo",teacherRepo);
+        model.addAttribute("subjectRepo",subjectRepo);
+        model.addAttribute("courseRepo",courseRepo);
+        model.addAttribute("teacherSubjectList",teacherSubjectList);
         model.addAttribute("teacherdata",teacherdata);
         model.addAttribute("departmentList",departmentList);
         model.addAttribute("courseList",courseList);
@@ -347,12 +394,56 @@ public class TeacherController {
         return "teacherandsubject";
     }
     @PostMapping("/teachersubjectdata/")
-    public String teachersubjectdataregistration(Model model,Teacher tech)
+    public String teachersubjectdataregistration(Model model,Integer subjectId,Integer courseId)
     {
-        teacherRepo.save(tech);
-        List<Teacher> teacherdata=teacherRepo.findAll();
-        model.addAttribute("teacherdata",teacherdata);
-        return"teacherandsubject";
+        String redirectpage="teacherandsubject";
+
+//        Subject subject=subjectRepo.getReferenceById(subjectId);
+//        System.out.println("SUbject repo"+subjectRepo);
+//        if(subject!=null)
+//        {
+        List<TeacherSubject> listofteachersubjectExisting = teacherSubjectRepo.findBySubjectId(subjectId);
+        if(listofteachersubjectExisting.isEmpty())
+        {
+            System.out.println("Tcid:"+session.getAttribute("tcid"));
+            teacherSubjectRepo.save(new TeacherSubject(Long.parseLong(session.getAttribute("tcid").toString()),subjectId,courseId));
+            List<Teacher> teacherdata=teacherRepo.findAll();
+            List<TeacherSubject> teacherSubjectList=teacherSubjectRepo.findAll();
+            List<Department> departmentList=deparmentRepo.findAll();
+            List<Course> courseList=courseRepo.findAll();
+            List<Subject> subList=subjectRepo.findAll();
+            model.addAttribute("teacherSubjectList",teacherSubjectList);
+            model.addAttribute("subjectRepo",subjectRepo);
+            model.addAttribute("teacherRepo",teacherRepo);
+            model.addAttribute("courseRepo",courseRepo);
+            model.addAttribute("teacherdata",teacherdata);
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("subList",subList);
+            model.addAttribute("teacherdata",teacherdata);
+            model.addAttribute("msg","Subject Added Successfull");
+            redirectpage="teacherandsubject";
+        }
+        else{
+            List<Teacher> teacherdata=teacherRepo.findAll();
+            List<TeacherSubject> teacherSubjectList=teacherSubjectRepo.findAll();
+            List<Department> departmentList=deparmentRepo.findAll();
+            List<Course> courseList=courseRepo.findAll();
+            List<Subject> subList=subjectRepo.findAll();
+            model.addAttribute("teacherSubjectList",teacherSubjectList);
+            model.addAttribute("subjectRepo",subjectRepo);
+            model.addAttribute("courseRepo",courseRepo);
+            model.addAttribute("teacherRepo",teacherRepo);
+            model.addAttribute("teacherdata",teacherdata);
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("subList",subList);
+            model.addAttribute("teacherdata",teacherdata);
+            model.addAttribute("msge","This subject is already has been taken by another teacher");
+            redirectpage="teacherandsubject";
+        }
+
+        return redirectpage;
     }
     @GetMapping("/summeryreport/")
     public String getreport(Model model)
@@ -364,7 +455,8 @@ public class TeacherController {
     @PostMapping("/attendancereport2/")
     public String summeryReport(Model model,Integer courseId,Integer month,Integer year)
     {
-
+        System.out.println("Course id:"+courseId);
+        System.out.println("month :"+month);
 //        int totalPresenty= attendanceRepo.getTotalPresenty(enrollno,courseId,month,year);
         int totallectures=lecturesRepo.getTotalLecturesByCourse(courseId);
         List<Student> studentList=studentRepo.findByCourseId(courseId);
@@ -419,6 +511,29 @@ public class TeacherController {
         model.addAttribute("attendedList",attendedList);
         model.addAttribute("subjectRepo",subjectRepo);
         return "teachersideattendance";
+    }
+
+    @GetMapping("/subjectteacher/delete/{id}/")
+    public String subjectDelete(Model model, @PathVariable Integer id)
+    {
+        teacherRepo.deleteById(id);
+        List<Teacher> teacherdata=teacherRepo.findAll();
+        System.out.println(teacherdata);
+
+        List<Department> departmentList=deparmentRepo.findAll();
+        List<Course> courseList=courseRepo.findAll();
+        List<Subject> subList=subjectRepo.findAll();
+        model.addAttribute("teacherdata",teacherdata);
+        model.addAttribute("departmentList",departmentList);
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("subList",subList);
+
+        List<TeacherSubject> teacherSubjectList=teacherSubjectRepo.findAll();
+        model.addAttribute("teacherRepo",teacherRepo);
+        model.addAttribute("subjectRepo",subjectRepo);
+        model.addAttribute("courseRepo",courseRepo);
+        model.addAttribute("teacherSubjectList",teacherSubjectList);
+        return "teacherandsubject";
     }
 
     @GetMapping("/GenerateAttendenceReport/delete/{id}/")
