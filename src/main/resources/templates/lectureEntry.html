@@ -85,14 +85,14 @@
                     </select></div>
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Class</label>
                     <select class="form-select" name="idCourse" required="">
-                        <option th:each="tech : ${tech}"
-                                th:value="${tech.course}" th:text="${tech.course}" selected="">
+                        <option th:each="tech : ${courseList}"
+                                th:value="${tech.courseId}" th:text="${tech.name}" selected="">
                         </option>
                     </select></div>
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Select Subject</label>
                     <select class="form-select" name="idSub" required="">
-                        <option th:each="tech : ${tech}"
-                                th:value="${tech.id}" th:text="${tech.subject}" selected="">
+                        <option th:each="tech : ${teacherSubjectList}"
+                                th:value="${tech.id}" th:text="${tech.name}" selected="">
                         </option>
                     </select></div>
                 <div class="form-group mb-3"><label class="form-label mb-0" for="float-input">Start DateTime</label><input class="form-control" id="startTime" type="time" placeholder="Start Time" name="startTime" required=""></div>

@@ -14,6 +14,4 @@ public interface LecturesRepo extends JpaRepository<Lectures,Integer> {
     @Query("select sum(totalLectures) from Lectures where subjectId in (select id from Subject where courseId=:courseId)")
     int getTotalLecturesByCourse(int courseId);
 
-
-
 }

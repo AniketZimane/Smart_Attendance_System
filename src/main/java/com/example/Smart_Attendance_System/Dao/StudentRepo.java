@@ -22,4 +22,5 @@ public interface StudentRepo extends JpaRepository<Student,Long> {
     @Query("select count(deptname) from Student where deptname=:deptname")
     Integer findByDeptname(String deptname);
 
+
 }
