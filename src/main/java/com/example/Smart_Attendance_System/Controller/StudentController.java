@@ -29,14 +29,15 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 public class StudentController {
     int maxSize=10;
-    @Autowired
-    StudentRepo sturepo;
+//    @Autowired
+//    StudentRepo studentRepo;
     @Autowired
     AttendanceRepo attendanceRepo;
     @Autowired
@@ -63,7 +64,7 @@ public class StudentController {
     {
         List <Student> studentList=studentRepo.findAll();
         List <Department> departmentList=deparmentRepo.findAll();
-        Long userCount = sturepo.count();
+        Long userCount = studentRepo.count();
         Long courseCount = courseRepo.count();
         Long teacherCount = teacherRepo.count();
         Long departmentCount = deparmentRepo.count();
@@ -101,7 +102,9 @@ public class StudentController {
     public String register(Model model)
     {
         List<Course> courseList=courseRepo.findAll();
+        List<Department> departmentList=deparmentRepo.findAll();
         model.addAttribute("courseList",courseList);
+        model.addAttribute("departmentList",departmentList);
         return "Registration";
     }
 
@@ -109,6 +112,10 @@ public class StudentController {
     public String editStudent(Model model, @PathVariable long enrollno)
     {
         Student stud = studentRepo.getReferenceById(enrollno);
+        List<Course> courseList=courseRepo.findAll();
+        List<Department> departmentList=deparmentRepo.findAll();
+        model.addAttribute("courseList",courseList);
+        model.addAttribute("departmentList",departmentList);
         model.addAttribute("stud", stud);
         return "Registration";
     }
@@ -116,69 +123,87 @@ public class StudentController {
     @GetMapping("/generateid/")
     public String generateId(Model model, Student stu)
     {
-        Student fetch=sturepo.save(stu);
+        Student fetch=studentRepo.save(stu);
         model.addAttribute("stu", fetch);
         return "GenerateId";
     }
     @PostMapping("/savedata/")
     public String submitData(Model model, Student stu, MultipartFile file) throws MessagingException, UnsupportedEncodingException {
-        String fileNameOld;
-        fileNameOld = file.getOriginalFilename();
-        String extension = fileNameOld.substring(fileNameOld.indexOf(".") + 1);
-        stu.setExtension(extension);
 
-        Student stuNew = sturepo.save(stu);
-        String fileNameNew = stuNew.getEnrollno()+ "." + extension;
+        String resultPage = "GenerateId";
+      
+        List<Student> listStudentExisting = studentRepo.findAllById(Collections.singleton(stu.getEnrollno()));
 
-        System.out.println("Image New Name is " + fileNameNew);
-        uploader.uploadFile(file, fileNameNew);
-        Pageable pageable = PageRequest.of(0, maxSize, Sort.by("enrollno").descending());
-        Page<Student> page = sturepo.findAll(pageable);
-        int totalPages = page.getTotalPages();
-        if(totalPages < 1)
+        if(listStudentExisting.isEmpty())
         {
-            totalPages = 1;
-        }
+            String fileNameOld;
+            fileNameOld = file.getOriginalFilename();
+            String extension = fileNameOld.substring(fileNameOld.indexOf(".") + 1);
+            stu.setExtension(extension);
 
-        model.addAttribute("stud", stuNew);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("curPage", 1);
-        model.addAttribute("msg","Employee saved successfully");
+            Student stuNew = studentRepo.save(stu);
+            String fileNameNew = stuNew.getEnrollno()+ "." + extension;
 
-        String from = "ad.developer@gmail.com";
-        String to = stuNew.getEmailid();
-        MimeMessage message=mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        String maiSubject="To verifying attendence";
-        String mailContent="<h1>Welcome to Innovative THings</h1><br><p>Your Registration Completed successfully</p>";
-        mailContent+= "<a href='https://localhost:8080/UserDashBoard/'><a/>";
-        helper.setFrom(from,"Innovative Things");
-        helper.setTo(to);
-        helper.setSubject(maiSubject);
-        helper.setText(mailContent,true);
+            System.out.println("Image New Name is " + fileNameNew);
+            uploader.uploadFile(file, fileNameNew);
+            Pageable pageable = PageRequest.of(0, maxSize, Sort.by("enrollno").descending());
+            Page<Student> page = studentRepo.findAll(pageable);
+            int totalPages = page.getTotalPages();
+            if(totalPages < 1)
+            {
+                totalPages = 1;
+            }
+
+            model.addAttribute("stud", stuNew);
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("curPage", 1);
+            model.addAttribute("msg","Employee saved successfully");
+
+            String from = "ad.developer@gmail.com";
+            String to = stuNew.getEmailid();
+            MimeMessage message=mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            String maiSubject="To verifying attendence";
+            String mailContent="<h1>Welcome to Innovative THings</h1><br><p>Your Registration Completed successfully</p><br><a href='https://localhost:8080/student/login/'>Student Login<a/>";
+            mailContent+= "<a href='https://localhost:8080/UserDashBoard/'><a/>";
+            helper.setFrom(from,"Innovative Things");
+            helper.setTo(to);
+            helper.setSubject(maiSubject);
+            helper.setText(mailContent,true);
 
 //        helper.addAttachment("/assets/img/swiftui.png", new ClassPathResource("/assets/img/swiftui.png"));
-        try
-        {
-            FileSystemResource res = new FileSystemResource(new ClassPathResource("static/assets/img/logo.png").getFile());
-            helper.addInline("swiftui.png", res);
-            mailSender.send(message);
-        }catch (Exception e)
-        {
-            System.out.println(e);
+            try
+            {
+                FileSystemResource res = new FileSystemResource(new ClassPathResource("static/assets/img/logo.png").getFile());
+                helper.addInline("swiftui.png", res);
+                mailSender.send(message);
+            }catch (Exception e)
+            {
+                System.out.println(e);
+            }
         }
-        return "GenerateId";
+        else{
+            List<Course> courseList=courseRepo.findAll();
+            List<Department> departmentList=deparmentRepo.findAll();
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("departmentList",departmentList);
+            model.addAttribute("msg","Record is already exist");
+            resultPage = "Registration";
+
+        }
+
+        return resultPage;
 
     }
     @GetMapping("/stu/delete/{stuId}/")
     public String deleteRecord(Model model, @PathVariable long stuId)
     {
-        sturepo.deleteById(stuId);
+        studentRepo.deleteById(stuId);
         Pageable pageable = PageRequest.of(0, maxSize, Sort.by("enrollno").descending());
-        Page<Student> page = sturepo.findAll(pageable);
+        Page<Student> page = studentRepo.findAll(pageable);
         int totalPages = page.getTotalPages();
         List<Student> listEmp = page.toList();
-        List<Student> stulist=sturepo.findAll();
+        List<Student> stulist=studentRepo.findAll();
         model.addAttribute("stulist",stulist);
 
         if(totalPages < 1)
@@ -215,7 +240,7 @@ public class StudentController {
     @GetMapping("/record/{colName}/")
     public String displayRecode(Model model, @PathVariable String colName)
     {
-        List<Student> stulist=sturepo.findAll(Sort.by(colName));
+        List<Student> stulist=studentRepo.findAll(Sort.by(colName));
         model.addAttribute("stulist",stulist);
         model.addAttribute("colName",colName);
         return "Record";
@@ -223,8 +248,8 @@ public class StudentController {
     @GetMapping("/attendancereport/")
     public String reportDaily(Model model)
     {
-        List<String>namelist=sturepo.findAll().stream().map(x->x.getLastname()).collect(Collectors.toList());
-        List<Integer>agelist=sturepo.findAll().stream().map(x->x.getAge()).collect(Collectors.toList());
+        List<String>namelist=studentRepo.findAll().stream().map(x->x.getLastname()).collect(Collectors.toList());
+        List<Integer>agelist=studentRepo.findAll().stream().map(x->x.getAge()).collect(Collectors.toList());
         model.addAttribute("name",namelist);
         model.addAttribute("age",agelist);
         return "pychart";
@@ -358,18 +383,24 @@ public class StudentController {
     {
 
 //        int totalPresenty= attendanceRepo.getTotalPresenty(enrollno,courseId,month,year);
-        int totallectures=lecturesRepo.getTotalLecturesByCourse(courseId);
-        List<Student> studentList=studentRepo.findByCourseId(courseId);
-        List<Course> courseList=courseRepo.findAll();
+        try {
+            int totallectures=lecturesRepo.getTotalLecturesByCourse(courseId);
+            List<Student> studentList=studentRepo.findByCourseId(courseId);
+            List<Course> courseList=courseRepo.findAll();
 
-        model.addAttribute("studentList",studentList);
-        model.addAttribute("attendanceRepo",attendanceRepo);
-        model.addAttribute("courseRepo",courseRepo);
-        model.addAttribute("courseId",courseId);
-        model.addAttribute("month",month);
-        model.addAttribute("year",year);
-        model.addAttribute("courseList",courseList);
-        model.addAttribute("totallectures",totallectures);
+            model.addAttribute("studentList",studentList);
+            model.addAttribute("attendanceRepo",attendanceRepo);
+            model.addAttribute("courseRepo",courseRepo);
+            model.addAttribute("courseId",courseId);
+            model.addAttribute("month",month);
+            model.addAttribute("year",year);
+            model.addAttribute("courseList",courseList);
+            model.addAttribute("totallectures",totallectures);
+        }catch (Exception e)
+        {
+            model.addAttribute("msg","Attendance Not Found");
+        }
+
 
         return "adminattendancesummery";
     }
@@ -379,5 +410,16 @@ public class StudentController {
         return "forgetpassword";
     }
 
+    @GetMapping("/coursesDept/{deptname}/")
+    @ResponseBody
+    public List<Course> getCoursesByDeptId(@PathVariable String deptname)
+    {
+        return courseRepo.findByDepartment(deptname);
+    }
+//    @GetMapping("/login/")
+//    public String loginPageAdmin(Model model)
+//    {
+//        return "/admindashboard/";
+//    }
 
 }
